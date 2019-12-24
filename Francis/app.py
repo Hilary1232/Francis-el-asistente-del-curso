@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, make_response
 from flask_restful import Resource, Api
 import modelo
 import json
@@ -15,6 +15,23 @@ app = Flask(__name__)
 api = Api(app)
 
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
+
+@app.route('/descargar', methods=["POST"])
+def descargarArchivoCsv():
+    request_file = request.files['data_file']
+    if not request_file:
+        return "No se seleccionó ningún archivo"
+
+    file_contents = request_file.stream.read().decode("utf-8")
+
+    result = transformar(file_contents)
+
+    response = make_response(result)
+    response.headers["Content-Disposition"] = "attachment; filename=guión.csv"
+    return response
+
+def transformar(text_file_contents):
+    return text_file_contents.replace("=", ",")
 
 def get_chat_id(data):
     """
@@ -91,5 +108,7 @@ def getcursos():
         
     js = json.dumps(lista_cursos)
     return js
+
 if __name__ == '__main__':
     run(host='localhost', port=5000, debug=True)
+
