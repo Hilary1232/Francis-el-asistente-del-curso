@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: modelo
+Version: 0.0.3
+Summary: Simple models independent of SQL/ORM.
+Home-page: https://github.com/kanzure/modelo
+Author: Bryan Bishop
+Author-email: kanzure@gmail.com
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3

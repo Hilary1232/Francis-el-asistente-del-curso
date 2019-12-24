@@ -1,0 +1,18 @@
+.header img {
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin-top: -15px;
+}
+.header {
+  background-color: rgba(17, 37, 102, 0.829);
+  text-decoration-color: white;
+  padding: 30px 10px 10px  10px;
+  top: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1{
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-indent: 30px;
+}
