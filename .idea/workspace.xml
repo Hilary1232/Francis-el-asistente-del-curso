@@ -20,6 +20,64 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\templates" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Francis-el-asistente-del-curso" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Francis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Francis/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Francis-el-asistente-del-curso" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Francis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Francis/bot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app" />
+        <item itemvalue="Python.bot" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -45,5 +103,35 @@
       <updated>1577220548055</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577735468980">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser/86.0.1450.864@86.0.1450.864" timestamp="1577735468980" />
+    <state x="593" y="188" key="FileChooserDialogImpl" timestamp="1577735112982">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1577735112982" />
+    <state width="1429" height="224" key="GridCell.Tab.0.bottom" timestamp="1577735587633">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1577735587633" />
+    <state width="1429" height="224" key="GridCell.Tab.0.center" timestamp="1577735587633">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1577735587633" />
+    <state width="1429" height="224" key="GridCell.Tab.0.left" timestamp="1577735587633">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1577735587633" />
+    <state width="1429" height="224" key="GridCell.Tab.0.right" timestamp="1577735587633">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1577735587633" />
+    <state x="322" y="75" key="SettingsEditor" timestamp="1577734102234">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state x="322" y="75" key="SettingsEditor/86.0.1450.864@86.0.1450.864" timestamp="1577734102234" />
   </component>
 </project>
