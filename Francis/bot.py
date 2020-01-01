@@ -1,7 +1,13 @@
+from flask import Flask, request, render_template, make_response,jsonify
+from flask_restful import Resource, Api
+import modelo
 import requests
-from bottle import (
-    run, post, response, request as bottle_request
-)
+
+#Crear motor para conectarse a SQLite3
+engine = modelo.engine
+session = modelo.Session()
+app = Flask(__name__)
+api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
 
 
@@ -18,18 +24,21 @@ def get_message_text(update):
 
 def send_message(chat_id, message_text):
     params = {"chat_id": chat_id, "text": message_text}
-    response = requests.post(BOT_URL + "sendMessage", data=params)
-    return response
+    response = requests.post(BOT_URL + "sendMessage",data=params)
+    return str(response)
 
-def lookup(data): #Se supone que aqui es la funcion donde entra al csv o a la base y busca la respuesta adecuada
+def lookup(data): #Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
   message = get_message_text(data)
   answer = send_message(get_chat_id(data),'Hilary es una perra!!')
   return answer
 
-@post('/')
+
+@app.route('/', methods=['POST'])
 def main():
-    data = bottle_request.json
+    data = request.json
     status = lookup(data)
     return status  # status 200 OK by default
 
-run(host='localhost', port=5000, debug=True)
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=5000, debug=True)
