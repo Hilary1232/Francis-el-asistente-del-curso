@@ -11,25 +11,27 @@ api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
 
 
-# create func that get chat id
+# función que recupera id de chat
 def get_chat_id(update):
     chat_id = update['message']["chat"]["id"]
     return chat_id
 
 
-# create function that get message text
+# función que recupera el mensaje de texto
 def get_message_text(update):
     message_text = update["message"]["text"]
     return message_text
 
+# envía el mensaje de vuelta al usuario
 def send_message(chat_id, message_text):
     params = {"chat_id": chat_id, "text": message_text}
     response = requests.post(BOT_URL + "sendMessage",data=params)
     return str(response)
 
-def lookup(data): #Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
+#Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
+def lookup(data):
   message = get_message_text(data)
-  answer = send_message(get_chat_id(data),'Hilary es una perra!!')
+  answer = send_message(get_chat_id(data),'Holaa!!')
   return answer
 
 
@@ -37,7 +39,7 @@ def lookup(data): #Se supone que aqui es la funcion donde va a entrar al csv o a
 def main():
     data = request.json
     status = lookup(data)
-    return status  # status 200 OK by default
+    return status  # status 200 OK por defecto
 
 
 if __name__ == '__main__':

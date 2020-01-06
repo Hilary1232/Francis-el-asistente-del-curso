@@ -3,7 +3,8 @@ from flask_restful import Resource, Api
 import modelo
 import json
 import collections
-
+import os
+import cgitb; cgitb.enable()
 #Crear motor para conectarse a SQLite3
 engine = modelo.engine
 session = modelo.Session()
@@ -13,18 +14,43 @@ api = Api(app)
 
 @app.route('/descargar', methods=["POST"])
 def descargar_archivo_csv():
-    request_file = request.files['data_file']
+    request_file = request.files['myfile']
     if not request_file:
-        return "No se seleccionó ningún archivo"
+        return "No se seleccionaron archivos"
 
     file_contents = request_file.stream.read().decode("utf-8")
 
     result = transformar(file_contents)
 
     response = make_response(result)
-    response.headers["Content-Disposition"] = "attachment; filename=FRANCIS_CSV_FILE.csv"
+    response.headers["Content-Disposition"] = "attachment; filename="+request_file.filename
     return response
 
+
+@app.route('/crear-curso', methods=["POST"])
+def crear_curso():
+    curso = request.form['curso']
+    conn = engine.connect()
+    return curso
+
+
+
+@app.route('/cargar', methods=["POST"])
+def cargar_archivo_csv():
+    #Obtener nombre de archivo
+    fileitem = request.files['myfile']
+    # Probar si se cargo el archivo
+    if fileitem.filename:
+        # dejar solo el nombre del archivo para evitar ataques traversales de directorio
+        fn = os.path.basename(fileitem.filename)
+        archivo = open(fn, 'wb')
+        archivo.write(fileitem.read())
+        message = 'El archivo"' + fn + '" ha sido cargado exitosamente'
+
+    else:
+        message = 'No se ha cargado ningun archivo'
+    print(message)
+    return render_template('home.html')
 
 def transformar(text_file_contents):
     return text_file_contents.replace("=", ",")
