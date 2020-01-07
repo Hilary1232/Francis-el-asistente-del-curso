@@ -12,4 +12,8 @@
           </div>
         </article>
     {% endfor %}
+        <form action="/descargar" method="POST" enctype="multipart/form-data">
+        <input type="file" name="data_file" /> <br />
+        <input type="submit" name="submit" value="Descargar Archivo" />
+        </form>
 {% endblock content %}

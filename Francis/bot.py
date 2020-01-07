@@ -5,12 +5,10 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from Francis import app
 global message,botAnswer
 
-#Crear motor para conectarse a SQLite3
-engine = modelo.engine
-session = modelo.Session()
-app = Flask(__name__)
+
 api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
 
@@ -69,7 +67,3 @@ def main():
     data = request.json
     status = lookup(data)
     return status  # status 200 OK by default
-
-
-if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
