@@ -5,6 +5,7 @@ import json
 import collections
 import os
 import cgitb; cgitb.enable()
+import csv
 #Crear motor para conectarse a SQLite3
 engine = modelo.engine
 session = modelo.Session()
@@ -37,6 +38,7 @@ def crear_curso():
 
 @app.route('/cargar', methods=["POST"])
 def cargar_archivo_csv():
+    conn = engine.connect()
     #Obtener nombre de archivo
     fileitem = request.files['myfile']
     # Probar si se cargo el archivo
@@ -45,8 +47,15 @@ def cargar_archivo_csv():
         fn = os.path.basename(fileitem.filename)
         archivo = open(fn, 'wb')
         archivo.write(fileitem.read())
+        # Load the CSV file into CSV reader
+        archivo.close()
+        creader = csv.DictReader(open(fn),delimiter=',')
+        for t in creader:
+            d=(t['codigo'],t['nombre'],t['descripcion'],t['ciclo'],t['anno'])
+            print(d)
+            if d != ('','','','',''):
+                conn.execute("INSERT INTO curso (codigo, nombre, descripcion, ciclo, anno) VALUES (?,?,?,?,?)",d)
         message = 'El archivo"' + fn + '" ha sido cargado exitosamente'
-
     else:
         message = 'No se ha cargado ningun archivo'
     print(message)
