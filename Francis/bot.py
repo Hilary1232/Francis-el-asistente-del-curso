@@ -1,11 +1,19 @@
-from flask import Flask, request, render_template, make_response,jsonify
-from flask_restful import Resource, Api
+import csv
+import pandas as pd
+import re
+import nltk
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import modelo
 import requests
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-global message,botAnswer
+from flask import Flask, request
+from flask_restful import Api
+from nltk.stem import wordnet
+from nltk.tokenize import sent_tokenize
+from nltk.corpus import stopwords
+from sklearn.metrics import pairwise_distances
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 #Crear motor para conectarse a SQLite3
 engine = modelo.engine
@@ -14,6 +22,43 @@ app = Flask(__name__)
 api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
 
+
+def normalizar(texto):
+    texto = str(texto).lower()
+    spl_char_text = re.sub(r'[^a-z0-9]', ' ', texto)
+    tokens=nltk.word_tokenize(spl_char_text)
+    lema = wordnet.WordNetLemmatizer()
+    tags_list = nltk.pos_tag(tokens, tagset=None)
+    lema_words=[]
+    for token, pos_token in tags_list:
+        if pos_token.startswith('V'):
+            pos_val - 'v'
+        elif pos_token.startswith('J'):
+            pos_val='a'
+        elif pos_token.startswith('R'):
+            pos_val='r'
+        else:
+            pos_val='n'
+        lema_token=lema.lemmatize(token,pos_val)
+        lema_words.append(lema_token)
+    return " ".join(lema_words)
+
+
+
+def armar_respuesta(texto):
+    df = pd.read_csv("guion1.csv")
+    df.head()
+    df['lemmatized_text'] = df['nombre']
+    tfidf = TfidfVectorizer()
+    x_tfidf=tfidf.fit_transform(df['lemmatized_text'].values.astype('U')).toarray()
+    df_tfidf = pd.DataFrame(x_tfidf,columns=tfidf.get_feature_names())
+    df_tfidf.head()
+    lemma = normalizar(texto)
+    tf = tfidf.transform([lemma]).toarray()
+    cos = 1-pairwise_distances(df_tfidf, tf, metric="cosine")
+    index_value = cos.argmax()
+    print(index_value)
+    return df['descripcion'].loc[index_value]
 
 # función que recupera id de chat
 def get_chat_id(update):
@@ -31,13 +76,8 @@ def get_message_text(update):
 def send_message(chat_id, message_text): #message_text es la respuesta del bot
     params = {"chat_id": chat_id, "text": message_text}
     response = requests.post(BOT_URL + "sendMessage",data=params)
-    send_email(botAnswer, message)
     return str(response)
 
-#Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
-def lookup(data):
-  message = get_message_text(data)
-  answer = send_message(get_chat_id(data),'Holaa!!')
 
 def send_email(answer,message):
     sender_email_address = 'hilarygonalez@gmail.com'
@@ -63,11 +103,13 @@ def send_email(answer,message):
     server.quit()
     return ""
 
-def lookup(data): #Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
-  global message, botAnswer
+
+#Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
+def lookup(data):
   message = get_message_text(data)
-  botAnswer = 'Esto es una prueba!!'
-  answer = send_message(get_chat_id(data),botAnswer)
+  respuesta = armar_respuesta(message)
+  answer = send_message(get_chat_id(data), respuesta)
+  answer = send_email(answer, message)
   return answer
 
 
