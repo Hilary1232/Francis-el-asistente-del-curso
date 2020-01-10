@@ -82,7 +82,7 @@ def send_message(chat_id, message_text): #message_text es la respuesta del bot
 def send_email(answer,message):
     sender_email_address = 'hilarygonalez@gmail.com'
     sender_email_password = 'Arcoiris10'
-    receiver_email_address = 'hilarygonzalez10@hotmail.com'
+    receiver_email_address = 'm.venegasb98@gmail.com'
 
     email_subject_line = 'Mensaje enviado por el Bot Francis'
 

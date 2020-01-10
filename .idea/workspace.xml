@@ -19,17 +19,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="C:/django/django_app/todo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Francis/templates" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\templates" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Francis-el-asistente-del-curso" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,8 +78,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.bot" />
+        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -113,30 +113,34 @@
       <screen x="86" y="0" width="1450" height="864" />
     </state>
     <state x="268" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/86.0.1450.864@86.0.1450.864" timestamp="1578608490636" />
-    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577735468980">
+    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578625915675">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser/86.0.1450.864@86.0.1450.864" timestamp="1577735468980" />
-    <state x="593" y="188" key="FileChooserDialogImpl" timestamp="1578609187157">
+    <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser/86.0.1450.864@86.0.1450.864" timestamp="1578625915675" />
+    <state x="543" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578631528388">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1578609187157" />
-    <state width="1429" height="224" key="GridCell.Tab.0.bottom" timestamp="1578612039911">
+    <state x="543" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/86.0.1450.864@86.0.1450.864" timestamp="1578631528388" />
+    <state x="593" y="188" key="FileChooserDialogImpl" timestamp="1578631800328">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1578612039911" />
-    <state width="1429" height="224" key="GridCell.Tab.0.center" timestamp="1578612039911">
+    <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1578631800328" />
+    <state width="1429" height="224" key="GridCell.Tab.0.bottom" timestamp="1578631815592">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1578612039911" />
-    <state width="1429" height="224" key="GridCell.Tab.0.left" timestamp="1578612039910">
+    <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1578631815592" />
+    <state width="1429" height="224" key="GridCell.Tab.0.center" timestamp="1578631815592">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1578612039910" />
-    <state width="1429" height="224" key="GridCell.Tab.0.right" timestamp="1578612039911">
+    <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1578631815592" />
+    <state width="1429" height="224" key="GridCell.Tab.0.left" timestamp="1578631815592">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
-    <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1578612039911" />
+    <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1578631815592" />
+    <state width="1429" height="224" key="GridCell.Tab.0.right" timestamp="1578631815592">
+      <screen x="86" y="0" width="1450" height="864" />
+    </state>
+    <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1578631815592" />
     <state x="322" y="75" key="SettingsEditor" timestamp="1578609198776">
       <screen x="86" y="0" width="1450" height="864" />
     </state>
