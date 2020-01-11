@@ -4,12 +4,48 @@
   height: 70px;
   margin-top: -15px;
 }
+#logged-pic{
+  border-radius: 50%;
+  border-width: thick;
+  display:inline-block;
+}
+#usr{
+    display:inline-block;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+#cuenta{
+    float:right;
+    position:relative;
+    bottom:60px;
+}
+#arrw{
+    position:relative;
+    display:inline-block;
+    bottom:60px;
+}
 .header {
   background-color: rgba(17, 37, 102, 0.829);
   text-decoration-color: white;
   padding: 30px 10px 5px  5px;
   top: 10px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: static;
 }
 .icon {
     padding: 10px;

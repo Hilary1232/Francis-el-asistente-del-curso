@@ -11,13 +11,19 @@
 </head>
 <body>
 <div class = "header">
-    <img src="static/icons/dino.jpg" alt="logo" class="logo"/>
+    <a href="/home"><img src="static/icons/dino.jpg" alt="logo" class="logo"/></a>
     <h1 id="k">Francis, el asistente de curso</h1>
+    <div id="cuenta">
+      <img id="logged-pic" class="mx-auto d-block"  width="70" height="70" src={{ current_user.img_src }}>
+        <div class="dropdown">
+            <span id="usr"><h2>{{ current_user.username }}</h2></span>
+            <div class="dropdown-content">
+                <a href="/profile"><h5>Perfil</h5></a>
+                <a  href="/logout"><h5>Logout</h5></a>
+          </div>
+        </div>
+    </div>
 </div>
-     <span class="buttons">
-        <a href="/">Home</a>
-        <a href="/cursos">Cursos</a>
-    </span>
 <form action="/cargar" method="POST" enctype="multipart/form-data">
         <input type="file" name="myfile" /> <br />
          <input type="submit" name="submit" value="Cargar" />

@@ -1,5 +1,5 @@
 from flask_restful import Resource, Api
-from flask import Flask, render_template, redirect, url_for, make_response, request
+from flask import Flask, render_template, redirect, url_for, make_response, request, flash
 from flask_bootstrap import Bootstrap
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -8,10 +8,11 @@ import csv
 import json
 import collections
 import os
-import cgitb;
+import secrets
+from PIL import Image
+import cgitb;cgitb.enable()
 from Francis.modelo import Usuario
 
-cgitb.enable()
 
 #Crear motor para conectarse a SQLite3
 app = Flask(__name__)
@@ -27,8 +28,9 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     engine = modelo.engine
     session = modelo.Session()
-    user = modelo.Usuario()
-    return session.query(Usuario).get(int(user_id))
+    user = session.query(Usuario).get(int(user_id))
+    session.close()
+    return user
 
 
 @app.route('/', methods=['GET'])
@@ -44,13 +46,12 @@ def register():
 def login():
     engine = modelo.engine
     session = modelo.Session()
-    username = request.form['username']
-    print(username)
     user = session.query(Usuario).first()
-    print(user)
     if user:
         if check_password_hash(user.password, request.form['password']):
             login_user(user, remember=request.form.get('remember'))
+            session.commit()
+            session.close()
             return redirect(url_for('home'))
 
     return '<h1>Usuario o contraseña incorrectos</h1>'
@@ -59,16 +60,29 @@ def login():
     return render_template('index.html')
 
 
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    print(picture_fn)
+    picture_path = os.path.join(app.root_path, 'static\profile_pics', picture_fn)
+    archivo = open(picture_path, 'wb')
+    archivo.write(form_picture.read())
+    archivo.close()
+    return os.path.join('static\profile_pics',picture_fn)
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    engine = modelo.engine
     session = modelo.Session()
     user = Usuario()
     hashed_password = generate_password_hash(request.form['password'], method='sha256')
     user.username=request.form['username']
+    validate_username(user.username)
     user.email=request.form['email']
+    validate_email(user.email)
     user.password=hashed_password
     user.bot_token=request.form['bot_token']
+    user.img_src = 'static\profile_pics\default.png'
     session.add(user)
     try:
         session.commit()
@@ -76,8 +90,73 @@ def signup():
         session.rollback()
     finally:
         session.close()
+    flash('Su cuenta ha sido creada! Ya puede hacer login', 'success')
     return render_template('index.html')
         #return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
+
+def validate_username(username):
+    session = modelo.Session()
+    user = session.query(Usuario).filter_by(username=username).first()
+    session.close()
+    if user:
+        raise Exception('Ese usuario ya existe. Favor elegir otro.')
+
+
+def validate_email(email):
+    session = modelo.Session()
+    user = session.query(Usuario).filter_by(email).first()
+    session.close()
+    if user:
+        raise Exception('Ese email ya existe. Favor elegir otro.')
+
+
+def update_username(username):
+    session = modelo.Session()
+    if username!= current_user.username:
+        user = session.query(Usuario).filter_by(username=username).first()
+        session.close()
+        if user:
+            raise Exception('Ese usuario ya existe. Favor elegir otro.')
+
+
+def update_email(email):
+    session = modelo.Session()
+    if email!= current_user.email:
+        user = session.query(Usuario).filter_by(email=email).first()
+        session.close()
+        if user:
+            raise Exception('Ese email ya existe. Favor elegir otro.')
+
+
+@app.route("/account", methods=['GET', 'POST'])
+@login_required
+def update_account():
+    engine = modelo.engine
+    conn = engine.connect()
+    session = modelo.Session()
+    fileitem = request.files['img']
+    if fileitem.filename:
+        picture_file = save_picture(fileitem)
+        current_user.img_src = picture_file
+        print("aqui",current_user.img_src)
+    current_user.username = request.form['username']
+    update_username(current_user.username)
+    current_user.email = request.form['email']
+    update_email(current_user.email)
+    sql = ''' UPDATE usuario
+              SET email = ? ,
+                  username = ? ,
+                  img_src = ?
+              WHERE id = ?'''
+    task = (current_user.email, current_user.username, current_user.img_src, current_user.id)
+    conn.execute(sql, task)
+    session.commit()
+    flash('Su perfil ha sido actualizado!', 'success')
+    return render_template('home.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 
 
@@ -106,6 +185,7 @@ def descargar_csv():
 @app.route('/crear-curso', methods=["POST"])
 def crear_curso():
     curso = request.form['curso']
+    engine = modelo.engine
     conn = engine.connect()
     return curso
 
@@ -151,6 +231,7 @@ def transformar(text_file_contents):
 @app.route('/home', methods=['GET','post']) #Cuando el href tenga un '/home', que llegue a esta funcion y ejecute
 @login_required
 def home():
+    print(app.root_path)
     return render_template('home.html')
 
 

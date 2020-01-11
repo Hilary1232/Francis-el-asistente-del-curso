@@ -24,6 +24,7 @@ class Usuario(Base, UserMixin):
     email = Column('email', String, unique=True)
     password = Column('password', String, unique=True)
     bot_token = Column('bot_token', String)
+    img_src = Column('img_src', String)
 
 engine = create_engine('sqlite:///db/francis.db')
 Base.metadata.create_all(bind=engine)
