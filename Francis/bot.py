@@ -46,7 +46,7 @@ def normalizar(texto):
 
 
 def armar_respuesta(texto):
-    df = pd.read_csv("guion1.csv")
+    df = pd.read_csv("static/cursos/Intro y Taller/guion1.csv")
     df.head()
     df['lemmatized_text'] = df['nombre']
     tfidf = TfidfVectorizer()

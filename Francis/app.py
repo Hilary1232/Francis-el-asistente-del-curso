@@ -10,11 +10,12 @@ import collections
 import os
 import secrets
 from PIL import Image
-import cgitb;cgitb.enable()
+import cgitb;
+
+cgitb.enable()
 from Francis.modelo import Usuario
 
-
-#Crear motor para conectarse a SQLite3
+# Crear motor para conectarse a SQLite3
 app = Flask(__name__)
 api = Api(app)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -42,6 +43,7 @@ def index():
 def register():
     return render_template('signup.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     engine = modelo.engine
@@ -55,7 +57,7 @@ def login():
             return redirect(url_for('home'))
 
     return '<h1>Usuario o contraseña incorrectos</h1>'
-    #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+    # return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     return render_template('index.html')
 
@@ -69,19 +71,20 @@ def save_picture(form_picture):
     archivo = open(picture_path, 'wb')
     archivo.write(form_picture.read())
     archivo.close()
-    return os.path.join('static\profile_pics',picture_fn)
+    return os.path.join('static\profile_pics', picture_fn)
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     session = modelo.Session()
     user = Usuario()
     hashed_password = generate_password_hash(request.form['password'], method='sha256')
-    user.username=request.form['username']
+    user.username = request.form['username']
     validate_username(user.username)
-    user.email=request.form['email']
+    user.email = request.form['email']
     validate_email(user.email)
-    user.password=hashed_password
-    user.bot_token=request.form['bot_token']
+    user.password = hashed_password
+    user.bot_token = request.form['bot_token']
     user.img_src = 'static\profile_pics\default.png'
     session.add(user)
     try:
@@ -92,7 +95,8 @@ def signup():
         session.close()
     flash('Su cuenta ha sido creada! Ya puede hacer login', 'success')
     return render_template('index.html')
-        #return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
+    # return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
+
 
 def validate_username(username):
     session = modelo.Session()
@@ -112,7 +116,7 @@ def validate_email(email):
 
 def update_username(username):
     session = modelo.Session()
-    if username!= current_user.username:
+    if username != current_user.username:
         user = session.query(Usuario).filter_by(username=username).first()
         session.close()
         if user:
@@ -121,7 +125,7 @@ def update_username(username):
 
 def update_email(email):
     session = modelo.Session()
-    if email!= current_user.email:
+    if email != current_user.email:
         user = session.query(Usuario).filter_by(email=email).first()
         session.close()
         if user:
@@ -138,7 +142,7 @@ def update_account():
     if fileitem.filename:
         picture_file = save_picture(fileitem)
         current_user.img_src = picture_file
-        print("aqui",current_user.img_src)
+        print("aqui", current_user.img_src)
     current_user.username = request.form['username']
     update_username(current_user.username)
     current_user.email = request.form['email']
@@ -154,10 +158,10 @@ def update_account():
     flash('Su perfil ha sido actualizado!', 'success')
     return render_template('home.html')
 
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
-
 
 
 @app.route('/logout')
@@ -178,7 +182,7 @@ def descargar_csv():
     result = transformar(file_contents)
 
     response = make_response(result)
-    response.headers["Content-Disposition"] = "attachment; filename="+request_file.filename
+    response.headers["Content-Disposition"] = "attachment; filename=" + request_file.filename
     return response
 
 
@@ -187,7 +191,15 @@ def crear_curso():
     curso = request.form['curso']
     engine = modelo.engine
     conn = engine.connect()
-    return curso
+    parent_dir = 'static\cursos'
+    path = os.path.join(parent_dir, curso)
+    # Create target Directory if don't exist
+    if not os.path.exists(path):
+        os.mkdir(path)
+        print("Directory ", curso, " Created ")
+    else:
+        print("Directory ", curso, " already exists")
+    return redirect('/home')
 
 
 def insertar_csv(fn):
@@ -207,7 +219,7 @@ def insertar_csv(fn):
 @app.route('/cargar', methods=["POST"])
 @login_required
 def cargar_csv():
-    #Obtener nombre de archivo
+    # Obtener nombre de archivo
     fileitem = request.files['myfile']
     # Probar si se cargo el archivo
     if fileitem.filename:
@@ -228,27 +240,39 @@ def transformar(text_file_contents):
     return text_file_contents.replace("=", ",")
 
 
-@app.route('/home', methods=['GET','post']) #Cuando el href tenga un '/home', que llegue a esta funcion y ejecute
+@app.route('/cargar_guiones', methods=['GET', 'POST'])
+@login_required
+def cargar_guiones():
+    curso = request.args.get('parameter', '')
+    parent_dir = 'static\cursos'
+    filename= os.path.join(parent_dir,curso)
+    guiones = os.listdir(filename)
+    return render_template("guiones.html", guiones=guiones)
+
+
+@app.route('/home', methods=['GET', 'post'])  # Cuando el href tenga un '/home', que llegue a esta funcion y ejecute
 @login_required
 def home():
-    print(app.root_path)
-    return render_template('home.html')
+    parent_dir = 'static\cursos'
+    cursos = os.listdir(parent_dir)
+    print(cursos)
+    return render_template('home.html', cursos=cursos)
 
 
-@app.route('/cursos', methods=['GET']) #Cuando la solicitud tiene un /cursos, devuelva la pagina de cursos
+@app.route('/cursos', methods=['GET'])  # Cuando la solicitud tiene un /cursos, devuelva la pagina de cursos
 def cursos():
     return render_template('cursos.html')
 
 
-@app.route('/get-key',methods=['POST'])
+@app.route('/get-key', methods=['POST'])
 def get_key():
     bot_key = request.form['key']
-    #key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
+    # key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
 
 
-@app.route('/cursos-get') #Es llamada por Javascript, para mostrar la tabla de cursos de la base. 
+@app.route('/cursos-get')  # Es llamada por Javascript, para mostrar la tabla de cursos de la base.
 def get_cursos():
-    #Ejecutar consulta y devolver datos JSON
+    # Ejecutar consulta y devolver datos JSON
     engine = modelo.engine
     conn = engine.connect()
     query = conn.execute("SELECT * FROM curso")
@@ -263,10 +287,9 @@ def get_cursos():
         d['ciclo'] = curso.ciclo
         d['anno'] = curso.anno
         lista_cursos.append(d)
-        
+
     js = json.dumps(lista_cursos)
     return js
 
 
 app.run(host='localhost', port=5001, debug=True)
-
