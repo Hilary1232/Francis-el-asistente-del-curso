@@ -14,14 +14,11 @@ from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from sklearn.metrics import pairwise_distances
 from sklearn.feature_extraction.text import TfidfVectorizer
-
 #Crear motor para conectarse a SQLite3
-engine = modelo.engine
-session = modelo.Session()
 app = Flask(__name__)
 api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
-
+tok = '1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ'
 
 def normalizar(texto):
     texto = str(texto).lower()
@@ -82,7 +79,11 @@ def send_message(chat_id, message_text): #message_text es la respuesta del bot
 def send_email(answer,message):
     sender_email_address = 'hilarygonalez@gmail.com'
     sender_email_password = 'Arcoiris10'
-    receiver_email_address = 'm.venegasb98@gmail.com'
+    qry = "SELECT email from usuario where bot_token = ?"
+    engine = modelo.engine
+    conn = engine.connect()
+    cons = conn.execute(qry, tok).first()
+    receiver_email_address = cons[0]
 
     email_subject_line = 'Mensaje enviado por el Bot Francis'
 
@@ -90,7 +91,6 @@ def send_email(answer,message):
     msg['From'] = sender_email_address
     msg['To'] = receiver_email_address
     msg['Subject'] = email_subject_line
-
     email_body = 'Mensaje:  '+message+'\n\nRespuesta del bot'+':   '+answer
     msg.attach(MIMEText(email_body, 'plain'))
 
@@ -98,19 +98,27 @@ def send_email(answer,message):
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
     server.login(sender_email_address, sender_email_password)
-
     server.sendmail(sender_email_address, receiver_email_address, email_content)
     server.quit()
-    return ""
+    return "todo bien"
 
+
+def log_answer(message, answer):
+    engine = modelo.engine
+    conn = engine.connect()
+    query = "INSERT INTO log(mensaje,respuesta, date) VALUES(?,?, datetime('now'));"
+    task = (message, answer)
+    status = conn.execute(query, task)
+    return status
 
 #Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
 def lookup(data):
-  message = get_message_text(data)
-  respuesta = armar_respuesta(message)
-  answer = send_message(get_chat_id(data), respuesta)
-  answer = send_email(answer, message)
-  return answer
+    message = get_message_text(data)
+    respuesta = armar_respuesta(message)
+    answer = send_message(get_chat_id(data), respuesta)
+    send_email(respuesta, message)
+    log_answer(message, respuesta)
+    return answer
 
 
 @app.route('/', methods=['POST'])

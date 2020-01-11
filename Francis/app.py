@@ -221,19 +221,25 @@ def insertar_csv(fn):
 def cargar_csv():
     # Obtener nombre de archivo
     fileitem = request.files['myfile']
+    curso = request.args.get('parameter', '')
+    guiones=request.args.get('guiones','')
+    parent_dir = 'static\cursos'
+    directory = os.path.join(parent_dir, curso)
     # Probar si se cargo el archivo
     if fileitem.filename:
         # dejar solo el nombre del archivo para evitar ataques traversales de directorio
         fn = os.path.basename(fileitem.filename)
-        archivo = open(fn, 'wb')
+        filepath = os.path.join(directory, fn)
+        archivo = open(filepath, 'wb')
+        print(fn)
         archivo.write(fileitem.read())
         archivo.close()
-        message = 'El archivo"' + fn + '" ha sido cargado exitosamente'
-        insertar_csv(fn)
+        message = 'El archivo"' + fileitem.filename+ '" ha sido cargado exitosamente'
+        insertar_csv(filepath)
     else:
         message = 'No se ha cargado ningun archivo'
-    print(message)
-    return render_template('home.html')
+    flash('Guion cargado con exito!')
+    return redirect('/home')
 
 
 def transformar(text_file_contents):
@@ -247,7 +253,7 @@ def cargar_guiones():
     parent_dir = 'static\cursos'
     filename= os.path.join(parent_dir,curso)
     guiones = os.listdir(filename)
-    return render_template("guiones.html", guiones=guiones)
+    return render_template("guiones.html", guiones=guiones, curso=curso)
 
 
 @app.route('/home', methods=['GET', 'post'])  # Cuando el href tenga un '/home', que llegue a esta funcion y ejecute

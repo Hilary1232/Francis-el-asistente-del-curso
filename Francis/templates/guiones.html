@@ -25,7 +25,11 @@
         </div>
     </div>
 </div>
-    <h1>Guiones</h1>
+    <h1>Guiones de {{ curso }}</h1>
+<form action="/cargar?parameter={{ curso }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="myfile" /> <br />
+         <input type="submit" name="submit" value="Cargar" />
+</form>
     {% if guiones %}
         <table class="table table-bordered">
         {% for guion in guiones %}
