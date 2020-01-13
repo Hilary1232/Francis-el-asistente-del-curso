@@ -48,14 +48,13 @@ def register():
 def login():
     engine = modelo.engine
     session = modelo.Session()
-    user = session.query(Usuario).first()
+    user = session.query(Usuario).filter_by(username=request.form['username']).first()
     if user:
         if check_password_hash(user.password, request.form['password']):
             login_user(user, remember=request.form.get('remember'))
             session.commit()
             session.close()
             return redirect(url_for('home'))
-
     return '<h1>Usuario o contraseña incorrectos</h1>'
     # return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
@@ -84,15 +83,10 @@ def signup():
     user.email = request.form['email']
     validate_email(user.email)
     user.password = hashed_password
-    user.bot_token = request.form['bot_token']
     user.img_src = 'static\profile_pics\default.png'
     session.add(user)
-    try:
-        session.commit()
-    except:
-        session.rollback()
-    finally:
-        session.close()
+    session.commit()
+    session.close()
     flash('Su cuenta ha sido creada! Ya puede hacer login', 'success')
     return render_template('index.html')
     # return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
@@ -108,7 +102,7 @@ def validate_username(username):
 
 def validate_email(email):
     session = modelo.Session()
-    user = session.query(Usuario).filter_by(email).first()
+    user = session.query(Usuario).filter_by(email=email).first()
     session.close()
     if user:
         raise Exception('Ese email ya existe. Favor elegir otro.')
@@ -199,6 +193,8 @@ def crear_curso():
         print("Directory ", curso, " Created ")
     else:
         print("Directory ", curso, " already exists")
+    sql = 'INSERT INTO curso(curso) VALUES(?);'
+    conn.execute(sql, curso)
     return redirect('/home')
 
 
@@ -207,10 +203,10 @@ def insertar_csv(fn):
     conn = engine.connect()
     creader = csv.DictReader(open(fn), delimiter=',')
     for t in creader:
-        d = (t['codigo'], t['nombre'], t['descripcion'], t['ciclo'], t['anno'])
+        d = (t['curso'], t['contexto'], t['respuesta'], t['sticker'], t['img_src'], t['send_on'])
         print(d)
         if d != ('', '', '', '', ''):
-            conn.execute("INSERT INTO curso (codigo, nombre, descripcion, ciclo, anno) VALUES (?,?,?,?,?)", d)
+            conn.execute("INSERT INTO guion (curso, contexto, respuesta, sticker, img_src, send_on) VALUES (?,?,?,?,?,?)", d)
     message = 'El archivo"' + fn + '" ha sido insertado exitosamente'
     print(message)
     return message
@@ -287,11 +283,7 @@ def get_cursos():
     for curso in cursos:
         d = collections.OrderedDict()
         d['id'] = curso.id
-        d['codigo'] = curso.codigo
         d['nombre'] = curso.nombre
-        d['descripcion'] = curso.descripcion
-        d['ciclo'] = curso.ciclo
-        d['anno'] = curso.anno
         lista_cursos.append(d)
 
     js = json.dumps(lista_cursos)

@@ -10,11 +10,8 @@ Base = declarative_base()
 class Curso(Base):
     __tablename__ = "curso"
     id = Column('id', Integer, primary_key=True)
-    codigo = Column('codigo', String)
     nombre = Column('nombre', String)
-    descripcion = Column('descripcion', String)
-    ciclo = Column('ciclo', String)
-    anno = Column('anno', String)
+
 
 
 class Usuario(Base, UserMixin):
@@ -23,7 +20,7 @@ class Usuario(Base, UserMixin):
     username = Column('username', String, unique=True)
     email = Column('email', String, unique=True)
     password = Column('password', String, unique=True)
-    bot_token = Column('bot_token', String)
+    bot_token = Column('bot_token', String, default='1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ')
     img_src = Column('img_src', String)
 
 engine = create_engine('sqlite:///db/francis.db')
