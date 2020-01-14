@@ -266,10 +266,5 @@ def cursos():
     return render_template('cursos.html')
 
 
-@app.route('/get-key', methods=['POST'])
-def get_key():
-    bot_key = request.form['key']
-    # key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
-
 
 app.run(host='localhost', port=5001, debug=True)
