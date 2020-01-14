@@ -272,22 +272,4 @@ def get_key():
     # key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
 
 
-@app.route('/cursos-get')  # Es llamada por Javascript, para mostrar la tabla de cursos de la base.
-def get_cursos():
-    # Ejecutar consulta y devolver datos JSON
-    engine = modelo.engine
-    conn = engine.connect()
-    query = conn.execute("SELECT * FROM curso")
-    cursos = query.fetchall()
-    lista_cursos = []
-    for curso in cursos:
-        d = collections.OrderedDict()
-        d['id'] = curso.id
-        d['nombre'] = curso.nombre
-        lista_cursos.append(d)
-
-    js = json.dumps(lista_cursos)
-    return js
-
-
 app.run(host='localhost', port=5001, debug=True)
