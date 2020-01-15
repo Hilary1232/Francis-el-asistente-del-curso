@@ -300,4 +300,52 @@ def botonLog():
     data = c.fetchall()
     return render_template('tablaGuiones.html', data=data)
 
+@app.route('/actualizar-guion', methods=['POST', 'GET'])
+def actualizarGuion():
+    id = request.form['id']
+    curso = request.form['curso']
+    contexto = request.form['contexto']
+    respuesta = request.form['respuesta']
+    sticker = request.form['sticker']
+    imagen = request.form['imagen']
+    fecha_envio = request.form['fecha_envio']
+    documento = request.form['documento']
+
+    engine = modelo.engine
+    conn = engine.connect()
+    if(curso != ''):
+        sql = 'UPDATE guion SET curso = ? WHERE id = ?;'
+        conn.execute(sql, curso, id)
+
+    if (contexto != ''):
+        sql = 'UPDATE guion SET contexto = ? WHERE id = ?;'
+        conn.execute(sql, contexto, id)
+
+    if (respuesta != ''):
+        sql = 'UPDATE guion SET respuesta = ? WHERE id = ?;'
+        conn.execute(sql, respuesta, id)
+
+    if (sticker != ''):
+        sql = 'UPDATE guion SET sticker = ? WHERE id = ?;'
+        conn.execute(sql, sticker, id)
+
+    if (imagen != ''):
+        sql = 'UPDATE guion SET img_src = ? WHERE id = ?;'
+        conn.execute(sql, imagen, id)
+
+    if (fecha_envio != ''):
+        sql = 'UPDATE guion SET send_on = ? WHERE id = ?;'
+        conn.execute(sql, fecha_envio, id)
+
+    if (documento != '' and documento != NULL):
+        sql = 'UPDATE guion SET document = ? WHERE id = ?;'
+        conn.execute(sql, documento, id)
+
+    db = sqlite3.connect('db/francis.db')
+    c = db.cursor()
+    c.execute("SELECT * FROM guion")
+    data = c.fetchall()
+    return render_template('tablaGuiones.html', data=data)
+
+
 app.run(host='localhost', port=5001, debug=True)

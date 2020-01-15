@@ -59,6 +59,7 @@
 </div>
 <table id="cursos" align="center">
   <tr>
+      <th>Id</th>
     <th>Curso</th>
     <th>Contexto</th>
       <th>Respuesta</th>
@@ -77,11 +78,23 @@
     <td>{{i[4]}}</td>
     <td>{{i[5]}}</td>
     <td>{{i[6]}}</td>
+    <td>{{i[7]}}</td>
 
 {%endfor%}
 
 </tr>
 </table>
-
+<br />
+<form action="/actualizar-guion" method="POST" enctype="multipart/form-data">
+    <input type="text" name="id" placeholder="Id" />
+        <input type="text" name="curso" placeholder="Curso" />
+    <input type="text" name="contexto" placeholder="Contexto" />
+    <input type="text" name="respuesta" placeholder="Respuesta" />
+    <input type="text" name="sticker" placeholder="Sticker" />
+    <input type="text" name="imagen" placeholder="Imagen" />
+    <input type="text" name="fecha_envio" placeholder="Fecha de Envío" />
+    <input type="text" name="documento" placeholder="Documento" /> <br />
+         <input type="submit" name="submit" value="Actualizar" />
+</form>
 </body>
 </html>
