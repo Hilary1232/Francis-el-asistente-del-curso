@@ -10,10 +10,12 @@ import collections
 import os
 import secrets
 from PIL import Image
-import cgitb;
+import cgitb
+from modelo import Usuario, Curso
+import sqlite3
 
 cgitb.enable()
-from Francis.modelo import Usuario
+
 
 # Crear motor para conectarse a SQLite3
 app = Flask(__name__)
@@ -36,7 +38,7 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route('/register', methods=['GET'])
@@ -203,7 +205,7 @@ def insertar_csv(fn):
     conn = engine.connect()
     creader = csv.DictReader(open(fn), delimiter=',')
     for t in creader:
-        d = (t['curso'], t['contexto'], t['respuesta'], t['sticker'], t['img_src'], t['send_on'])
+        d = (t['curso'], t['contexto'], t['respuesta'], t['sticker'], t['img_src'], t['send_on'], t['document'])
         print(d)
         if d != ('', '', '', '', ''):
             conn.execute("INSERT INTO guion (curso, contexto, respuesta, sticker, img_src, send_on) VALUES (?,?,?,?,?,?)", d)
@@ -261,15 +263,41 @@ def home():
     return render_template('home.html', cursos=cursos)
 
 
-@app.route('/cursos', methods=['GET'])  # Cuando la solicitud tiene un /cursos, devuelva la pagina de cursos
-def cursos():
-    return render_template('cursos.html')
-
-
 @app.route('/get-key', methods=['POST'])
 def get_key():
     bot_key = request.form['key']
     # key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
 
+@app.route('/show-cursos', methods=['POST', 'GET'])
+def tablaCursos():
+    db = sqlite3.connect('db/francis.db')
+    c = db.cursor()
+    c.execute("SELECT * FROM curso")
+    data = c.fetchall()
+    return render_template('tablaCursos.html', data = data)
+
+@app.route('/log', methods=['POST', 'GET'])
+def TablaLog():
+    db = sqlite3.connect('db/francis.db')
+    c = db.cursor()
+    c.execute("SELECT * FROM log")
+    data = c.fetchall()
+    return render_template('tablaLog.html', data = data)
+
+@app.route('/show-guiones', methods=['POST', 'GET'])
+def TablaGuiones():
+    db = sqlite3.connect('db/francis.db')
+    c = db.cursor()
+    c.execute("SELECT * FROM guion")
+    data = c.fetchall()
+    return render_template('tablaGuiones.html', data = data)
+
+@app.route('/vista-log', methods=['POST'])
+def botonLog():
+    db = sqlite3.connect('db/francis.db')
+    c = db.cursor()
+    c.execute("SELECT * FROM log")
+    data = c.fetchall()
+    return render_template('tablaGuiones.html', data=data)
 
 app.run(host='localhost', port=5001, debug=True)
