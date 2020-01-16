@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Log</title>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,20 +25,38 @@
         </div>
     </div>
 </div>
-    <h1>Guiones de {{ curso }}</h1>
-<form action="/cargar?parameter={{ curso }}" method="POST" enctype="multipart/form-data">
-        <input type="file" name="myfile" /> <br />
-         <input type="submit" id="btn" name="submit" value="Cargar" />
-</form>
+<div id="nav">
+    <ul>
+  <li><a class="active" href="/home">Inicio</a></li>
+  <li><a href="/show-cursos">Cursos</a></li>
+  <li><a href="/show-guiones">Guiones</a></li>
+  <li><a class="active" href="/log">Log</a></li>
+</ul>
+</div>
+<table id="cursos" align="center">
+  <tr>
+      <th>Id</th>
+      <th>Mensaje</th>
+      <th>Respuesta</th>
+      <th>Sticker</th>
+      <th>Imagen</th>
+      <th>Documento</th>
+      <th>Fecha</th>
+  </tr>
+  {%for entrada in log%}
+<tr>
+    <td>{{entrada.id}}</td>
+    <td>{{entrada.mensaje}}</td>
+    <td>{{entrada.respuesta}}</td>
+    <td>{{entrada.sticker}}</td>
+    <td>{{entrada.imagen}}</td>
+    <td>{{entrada.documento}}</td>
+    <td>{{entrada.fecha}}</td>
 
-    {% if guiones %}
-        <table class="table table-bordered">
-        {% for guion in guiones %}
-            <tr class="table-secondary">
-                <td><center><a href="#"value={{ guion }}>{{ guion }}</a></center></td>
-            </tr>
-        {% endfor %}
-        </table>
-    {% endif %}
+{%endfor%}
+
+</tr>
+</table>
+
 </body>
 </html>

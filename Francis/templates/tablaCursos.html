@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Cursos</title>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,20 +25,29 @@
         </div>
     </div>
 </div>
-    <h1>Guiones de {{ curso }}</h1>
-<form action="/cargar?parameter={{ curso }}" method="POST" enctype="multipart/form-data">
-        <input type="file" name="myfile" /> <br />
-         <input type="submit" id="btn" name="submit" value="Cargar" />
-</form>
+<div id="nav">
+    <ul>
+  <li><a href="/home">Inicio</a></li>
+  <li><a class="active" href="/show-cursos">Cursos</a></li>
+  <li><a href="/show-guiones">Guiones</a></li>
+  <li><a href="/log">Log</a></li>
+</ul>
+</div>
+<table id="cursos" align="center">
+  <tr>
+    <th>Id</th>
+    <th>Nombre del Curso</th>
+  </tr>
+  {%for curso in cursos%}
 
-    {% if guiones %}
-        <table class="table table-bordered">
-        {% for guion in guiones %}
-            <tr class="table-secondary">
-                <td><center><a href="#"value={{ guion }}>{{ guion }}</a></center></td>
-            </tr>
-        {% endfor %}
-        </table>
-    {% endif %}
+<tr>
+    <td>{{curso.id}}</td>
+    <td>{{curso.curso}}</td>
+
+{%endfor%}
+
+</tr>
+</table>
+
 </body>
 </html>
