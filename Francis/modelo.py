@@ -28,7 +28,7 @@ class Guion(Base):
 class Log(Base):
     __tablename__ = "log"
     id = Column('id', Integer, primary_key=True)
-    curso = Column('mensaje', String)
+    mensaje = Column('mensaje', String)
     respuesta = Column('respuesta', String)
     sticker = Column('sticker', String)
     imagen = Column('imagen', String)

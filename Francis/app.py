@@ -318,7 +318,8 @@ Redirecciona a la página tablaLog
 @app.route('/log', methods=['POST', 'GET'])
 def tabla_log():
     session = modelo.Session()
-    log = session.query(Log).all()
+    registros = session.query(Log)
+    log = registros.all()
     session.close()
     return render_template('tablaLog.html', log=log)
 

@@ -73,29 +73,32 @@ def obtener_chat_id(data):
 
 # función que recupera id de chat
 def obtener_usuario(data):
-    usuario = data['message']["chat"]["username"]
+    usuario = data['message']["from"]["username"]
     return usuario
 
 
 # función que recupera el mensaje de texto
 def obtener_mensaje(data):
-    mensaje = data["message"]["text"]
+    try:
+        mensaje = data["message"]["text"]
+    except KeyError:
+        mensaje = "Adicion a nuevo grupo"
     return mensaje
 
 
 # envía el mensaje de vuelta al usuario
 def enviar_mensaje(chat_id, mensaje):
     respuesta = ""
-    print("HERE!", mensaje[2])
+    print("HERE!", mensaje[1])
     if mensaje[2] == "":
         params = {"chat_id": chat_id, "text": mensaje[0]}
         response = requests.post(BOT_URL + "sendMessage", data=params)
         respuesta = response
-    if mensaje[1] is not None:
+    if mensaje[1] != "":
         stickerinfo = {"chat_id": chat_id, "sticker": mensaje[1]}
         sticker = requests.post(BOT_URL + "sendSticker", data=stickerinfo)
         respuesta = sticker
-    if mensaje[2] is not None:
+    if mensaje[2] != "":
         picinfo = {"chat_id": chat_id, "caption": mensaje[0], "photo": mensaje[2]}
         imagen = requests.post(BOT_URL + "sendPhoto", data=picinfo)
         respuesta = imagen
@@ -143,9 +146,12 @@ def loggear_respuesta(mensaje, respuesta):
     status = conn.execute(query, task)
     conn.close()
     return status
-
-
-# Se supone que aqui es la funcion donde va a entrar al csv o a la base y busca la respuesta adecuada
+'''
+def obtener_tipo(data):
+    tipo = data['message']["chat"]["type"]
+    return tipo
+'''
+#  aqui es la funcion donde va a la base y busca la respuesta adecuada
 def lookup(data):
     mensaje = obtener_mensaje(data)
     usuario = obtener_usuario(data)

@@ -35,8 +35,8 @@
 </div>
 <table id="cursos" align="center">
   <tr>
-    <th>Id</th>
-    <th>Mensaje</th>
+      <th>Id</th>
+      <th>Mensaje</th>
       <th>Respuesta</th>
       <th>Sticker</th>
       <th>Imagen</th>
@@ -44,15 +44,14 @@
       <th>Fecha</th>
   </tr>
   {%for entrada in log%}
-
 <tr>
-    <td>{{log.id}}</td>
-    <td>{{log.mensaje}}</td>
-    <td>{{log.respuesta}}</td>
-    <td>{{log.sticker}}</td>
-    <td>{{log.imagen}}</td>
-    <td>{{log.documento}}</td>
-    <td>{{log.fecha}}</td>
+    <td>{{entrada.id}}</td>
+    <td>{{entrada.mensaje}}</td>
+    <td>{{entrada.respuesta}}</td>
+    <td>{{entrada.sticker}}</td>
+    <td>{{entrada.imagen}}</td>
+    <td>{{entrada.documento}}</td>
+    <td>{{entrada.fecha}}</td>
 
 {%endfor%}
 
