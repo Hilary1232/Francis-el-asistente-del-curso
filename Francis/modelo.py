@@ -16,7 +16,7 @@ class Curso(Base):
 class Guion(Base):
     __tablename__ = "guion"
     id = Column('id', Integer, primary_key=True)
-    curso = Column('tema', String)
+    tema = Column('tema', String)
     contexto = Column('contexto', String)
     respuesta = Column('respuesta', String)
     sticker = Column('sticker', String)

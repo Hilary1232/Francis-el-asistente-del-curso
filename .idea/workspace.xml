@@ -34,17 +34,18 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\templates" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Francis-el-asistente-del-curso" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -93,8 +94,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.bot" />
+        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -140,25 +141,25 @@
       <screen x="86" y="0" width="1450" height="864" />
     </state>
     <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1578631800328" />
-    <state width="1453" height="292" key="GridCell.Tab.0.bottom" timestamp="1579223380812">
+    <state width="1453" height="292" key="GridCell.Tab.0.bottom" timestamp="1579211930120">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1579223380812" />
+    <state width="1453" height="292" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1579211930120" />
     <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.center" timestamp="1579223380812">
+    <state width="1453" height="292" key="GridCell.Tab.0.center" timestamp="1579211930119">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1579223380812" />
+    <state width="1453" height="292" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1579211930119" />
     <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.left" timestamp="1579223380812">
+    <state width="1453" height="292" key="GridCell.Tab.0.left" timestamp="1579211930119">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1579223380811" />
+    <state width="1453" height="292" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1579211930119" />
     <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1578745300903" />
-    <state width="1453" height="292" key="GridCell.Tab.0.right" timestamp="1579223380812">
+    <state width="1453" height="292" key="GridCell.Tab.0.right" timestamp="1579211930119">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1579223380812" />
+    <state width="1453" height="292" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1579211930119" />
     <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
     <state x="322" y="75" key="SettingsEditor" timestamp="1578609198776">
       <screen x="86" y="0" width="1450" height="864" />

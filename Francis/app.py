@@ -227,10 +227,10 @@ def insertar_csv(fn):
     conn = engine.connect()
     creader = csv.DictReader(open(fn), delimiter=',')
     for t in creader:
-        d = (t['curso'], t['contexto'], t['respuesta'], t['sticker'], t['img_src'], t['send_on'], t['document'])
+        d = (t['tema'], t['contexto'], t['respuesta'], t['sticker'], t['imagen'],  t['documento'], t['fecha_envio'])
         print(d)
         if d != ('', '', '', '', ''):
-            conn.execute("INSERT INTO guion (curso, contexto, respuesta, sticker, imagen, documento, fecha_envio) VALUES (?,?,?,?,?,?)", d)
+            conn.execute("INSERT INTO guion (tema, contexto, respuesta, sticker, imagen, documento, fecha_envio) VALUES (?,?,?,?,?,?,?)", d)
     message = 'El archivo"' + fn + '" ha sido insertado exitosamente'
     return message
 
@@ -359,7 +359,7 @@ def actualizar_guion():
     engine = modelo.engine
     conn = engine.connect()
     if tema != '':
-        sql = 'UPDATE guion SET curso = ? WHERE id = ?;'
+        sql = 'UPDATE guion SET tema = ? WHERE id = ?;'
         conn.execute(sql, tema, id)
 
     if contexto != '':
@@ -375,26 +375,28 @@ def actualizar_guion():
         conn.execute(sql, sticker, id)
 
     if imagen != '':
-        sql = 'UPDATE guion SET img_src = ? WHERE id = ?;'
+        sql = 'UPDATE guion SET imagen = ? WHERE id = ?;'
         conn.execute(sql, imagen, id)
 
     if fecha_envio == 'Kill':
         kill = ''
-        sql = 'UPDATE guion SET send_on = ? WHERE id = ?;'
+        sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
         conn.execute(sql, kill, id)
 
     if fecha_envio != '':
-        sql = 'UPDATE guion SET send_on = ? WHERE id = ?;'
+        sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
         conn.execute(sql, fecha_envio, id)
 
     if documento != '' and documento is not None:
-        sql = 'UPDATE guion SET document = ? WHERE id = ?;'
+        sql = 'UPDATE guion SET documento = ? WHERE id = ?;'
         conn.execute(sql, documento, id)
 
-    conn.execute("SELECT * FROM guion")
-    data = conn.fetchall()
     conn.close()
-    return render_template('tablaGuiones.html', data=data)
+    session = modelo.Session()
+    data = session.query(Guion)
+    guiones = data.all()
+    session.close()
+    return render_template('tablaGuiones.html', guiones=guiones)
 
 
 app.run(host='localhost', port=5001, debug=True)

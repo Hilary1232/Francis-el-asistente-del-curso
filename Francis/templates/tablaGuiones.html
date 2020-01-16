@@ -34,6 +34,18 @@
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
+<form action="/actualizar-guion" method="POST" enctype="multipart/form-data">
+    <input type="text" name="id" placeholder="Id" />
+        <input type="text" name="tema" placeholder="Tema" />
+    <input type="text" name="contexto" placeholder="Contexto" />
+    <input type="text" name="respuesta" placeholder="Respuesta" />
+    <input type="text" name="sticker" placeholder="Sticker" />
+    <input type="text" name="imagen" placeholder="Imagen" />
+    <input type="text" name="fecha_envio" placeholder="Fecha de Envío" /><br>
+    <input type="text" name="documento" placeholder="Documento" />
+         <input id = "btn" type="submit" name="submit" value="Actualizar Registro" />
+</form>
+<br><br>
 <table id="cursos" align="center">
   <tr>
       <th>Id</th>
@@ -53,7 +65,6 @@
     <td>{{data.tema}}</td>
     <td>{{data.contexto}}</td>
     <td>{{data.respuesta}}</td>
-    <td>{{data.respuesta}}</td>
     <td>{{data.sticker}}</td>
     <td>{{data.imagen}}</td>
     <td>{{data.documento}}</td>
@@ -64,16 +75,5 @@
 </tr>
 </table>
 <br />
-<form action="/actualizar-guion" method="POST" enctype="multipart/form-data">
-    <input type="text" name="id" placeholder="Id" />
-        <input type="text" name="tema" placeholder="Tema" />
-    <input type="text" name="contexto" placeholder="Contexto" />
-    <input type="text" name="respuesta" placeholder="Respuesta" />
-    <input type="text" name="sticker" placeholder="Sticker" />
-    <input type="text" name="imagen" placeholder="Imagen" />
-    <input type="text" name="fecha_envio" placeholder="Fecha de Envío" />
-    <input type="text" name="documento" placeholder="Documento" /> <br />
-         <input id = "btn" type="submit" name="submit" value="Actualizar" />
-</form>
 </body>
 </html>
