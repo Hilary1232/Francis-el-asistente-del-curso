@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Guiones</title>
+    <link rel='stylesheet' type='text/css' href='/static/style.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/home.js"></script>
+<style>
+#cursos {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+
+}
+
+#cursos td, #cursos th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#cursos tr:nth-child(even){background-color: #f2f2f2;}
+
+#cursos tr:hover {background-color: #ddd;}
+
+#cursos th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(17, 37, 102, 0.829);
+  color: white;
+}
+</style>
+</head>
+<body>
+<div class = "header">
+    <a href="/home"><img src="static/icons/dino.jpg" alt="logo" class="logo"/></a>
+    <h1 id="k">Francis, el asistente de curso</h1>
+    <div id="cuenta">
+      <img id="logged-pic" class="mx-auto d-block"  width="70" height="70" src={{ current_user.img_src }}>
+        <div class="dropdown">
+            <span id="usr"><h2>{{ current_user.username }}</h2></span>
+            <div class="dropdown-content">
+                <a href="/profile"><h5>Perfil</h5></a>
+                <a  href="/logout"><h5>Logout</h5></a>
+          </div>
+        </div>
+    </div>
+</div>
+<div id="nav">
+    <ul>
+  <li><a class="active" href="/home">Inicio</a></li>
+  <li><a href="/show-cursos">Cursos</a></li>
+  <li><a href="/show-guiones">Guiones</a></li>
+  <li><a href="/log">Log</a></li>
+</ul>
+</div>
+<table id="cursos" align="center">
+  <tr>
+      <th>Id</th>
+    <th>Curso</th>
+    <th>Contexto</th>
+      <th>Respuesta</th>
+      <th>Sticker</th>
+      <th>Imagen</th>
+      <th>Fecha de envío</th>
+      <th>Documento</th>
+  </tr>
+  {%for i in data%}
+
+<tr>
+    <td>{{i[0]}}</td>
+    <td>{{i[1]}}</td>
+    <td>{{i[2]}}</td>
+    <td>{{i[3]}}</td>
+    <td>{{i[4]}}</td>
+    <td>{{i[5]}}</td>
+    <td>{{i[6]}}</td>
+    <td>{{i[7]}}</td>
+
+{%endfor%}
+
+</tr>
+</table>
+<br />
+<form action="/actualizar-guion" method="POST" enctype="multipart/form-data">
+    <input type="text" name="id" placeholder="Id" />
+        <input type="text" name="curso" placeholder="Curso" />
+    <input type="text" name="contexto" placeholder="Contexto" />
+    <input type="text" name="respuesta" placeholder="Respuesta" />
+    <input type="text" name="sticker" placeholder="Sticker" />
+    <input type="text" name="imagen" placeholder="Imagen" />
+    <input type="text" name="fecha_envio" placeholder="Fecha de Envío" />
+    <input type="text" name="documento" placeholder="Documento" /> <br />
+         <input type="submit" name="submit" value="Actualizar" />
+</form>
+</body>
+</html>

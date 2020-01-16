@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Cursos</title>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/static/home.js"></script>
+<style>
+#cursos {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+
+}
+
+#cursos td, #cursos th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#cursos tr:nth-child(even){background-color: #f2f2f2;}
+
+#cursos tr:hover {background-color: #ddd;}
+
+#cursos th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(17, 37, 102, 0.829);
+  color: white;
+}
+</style>
 </head>
 <body>
 <div class = "header">
@@ -33,24 +57,21 @@
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
-<div>
-    <h1>Cursos</h1>
-    {% if cursos %}
-        <table class="table table-bordered">
-        {% for curso in cursos %}
-            <tr class="table-secondary">
-                <td><center><a href="/cargar_guiones?parameter={{ curso }}"value={{ curso }}>{{ curso }}</a></center></td>
-            </tr>
-        {% endfor %}
-        </table>
-    {% endif %}
-<form action="/crear-curso" method="POST" enctype="multipart/form-data">
-        <input type="text" name="curso" placeholder="Nombre Curso" /> <br />
-         <input type="submit" name="submit" value="Cargar" />
-</form>
-    <form action="/vista-log" method="POST" enctype="multipart/form-data">
-        <input type="submit" name="submit" value="Ver log" />
-</form>
-</div>
+<table id="cursos" align="center">
+  <tr>
+    <th>Id</th>
+    <th>Nombre del Curso</th>
+  </tr>
+  {%for i in data%}
+
+<tr>
+    <td>{{i[0]}}</td>
+    <td>{{i[1]}}</td>
+
+{%endfor%}
+
+</tr>
+</table>
+
 </body>
 </html>
