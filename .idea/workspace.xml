@@ -35,14 +35,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\templates" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
     </key>
   </component>
   <component name="RunManager" selected="Python.bot_clock">
