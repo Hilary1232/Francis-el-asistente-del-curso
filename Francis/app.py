@@ -266,6 +266,57 @@ def transformar(text_file_contents):
     return text_file_contents.replace("=", ",")
 
 
+@app.route('/imagenes', methods=['GET','POST'])
+def imagenes():
+    return render_template('imagenes.html')
+
+@app.route('/subir-imagen', methods=['GET','POST'])
+def subir_imagen():
+    fileitem = request.files['myfile']
+    fn = os.path.basename(fileitem.filename)
+    directory='static\img'
+    filepath = os.path.join(directory, fn)
+    archivo = open(filepath, 'wb')
+    archivo.write(fileitem.read())
+    archivo.close()
+    return redirect('/imagenes')
+
+
+@app.route('/documentos', methods=['GET','POST'])
+def documentos():
+    return render_template('documentos.html')
+
+
+@app.route('/subir-doc', methods=['GET','POST'])
+def subir_doc():
+    fileitem = request.files['myfile']
+    fn = os.path.basename(fileitem.filename)
+    directory = 'static\\files'
+    filepath = os.path.join(directory, fn)
+    archivo = open(filepath, 'wb')
+    archivo.write(fileitem.read())
+    archivo.close()
+    return redirect('/documentos')
+
+
+@app.route('/stickers', methods=['GET','POST'])
+def stickers():
+    return render_template('stickers.html')
+
+
+@app.route('/subir-sticker', methods=['GET','POST'])
+def subir_sticker():
+    fileitem = request.files['myfile']
+    fn = os.path.basename(fileitem.filename)
+    directory = 'static\stickers'
+    filepath = os.path.join(directory, fn)
+    archivo = open(filepath, 'wb')
+    archivo.write(fileitem.read())
+    archivo.close()
+    return redirect('/stickers')
+
+
+
 @app.route('/cargar_guiones', methods=['GET', 'POST'])
 @login_required
 def cargar_guiones():

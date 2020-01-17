@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Perfil</title>
+    <title>Imagenes</title>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/home.js"></script>
 </head>
 <body>
 <div class = "header">
@@ -18,9 +19,8 @@
         <div class="dropdown">
             <span id="usr"><h2>{{ current_user.username }}</h2></span>
             <div class="dropdown-content">
-                <a href="/profile"><h3>Perfil</h3></a>
-            <a  href="/account"><h3>Ajustes</h3></a>
-                <a  href="/logout"><h3>Logout</h3></a>
+                <a href="/profile"><h5>Perfil</h5></a>
+                <a  href="/logout"><h5>Logout</h5></a>
           </div>
         </div>
     </div>
@@ -31,20 +31,11 @@
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
     <li><a href="/grupos">Grupos</a></li>
-     <li><a href="/imagenes">Imagenes</a></li>
-    <li><a href="/documentos">Documentos</a></li>
-    <li><a href="/stickers">Stickers</a></li>
+         <li><a class="active"href="/imagenes">Imagenes</a></li>
+        <li><a href="/documentos">Documentos</a></li>
+        <li><a href="/stickers">Stickers</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
-    <div class="content-section">
-        <h3>Mis datos</h3>
-        <form method="POST" action="/account" enctype="multipart/form-data">
-                    <input type="text" id="username" name="username" value={{ current_user.username }}>
-                    <input type="email" id="email" name="email" value= {{ current_user.email }}>
-                    <input type="file" id="img" name="img" value={{ current_user.img_src }}>
-                    <input type="submit"  id="btn" value="Actualizar">
-        </form>
-    </div>
 </body>
 </html>

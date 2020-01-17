@@ -27,17 +27,20 @@
 </div>
 <div id="nav">
     <ul>
-  <li><a class="active" href="/home">Inicio</a></li>
+  <li><a a class="active" href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
     <li><a href="/grupos">Grupos</a></li>
+     <li><a href="/imagenes">Imagenes</a></li>
+    <li><a href="/documentos">Documentos</a></li>
+    <li><a href="/stickers">Stickers</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
 <div id="cursos-section">
     <h1>Cursos</h1>
     {% if cursos %}
-        <table id="cursos-row" class="table table-bordered">
+        <table id="cursos-table" class="table table-bordered">
         {% for curso in cursos %}
             <tr class="table-secondary">
                 <td><center><a href="/cargar_guiones?parameter={{ curso }}"value={{ curso }}>{{ curso }}</a></center></td>
@@ -51,13 +54,32 @@
          <input type="submit" id="btn" name="submit" value="Cargar" />
 </form>
     <form action="/log" method="POST" enctype="multipart/form-data">
-        <input type="submit" id="btn2" name="submit" value="Ver log" />
+        <input type="submit" class="boton"  name="submit" value="Ver log" />
 </form>
 
-    </form>
+</form>
     <form action="/webhook" method="POST" enctype="multipart/form-data">
         <input type="text" name="url" placeholder="URL Sitio para Webhook" /> <br />
-        <input type="submit" id="btn3" name="submit" formtarget="_blank" value="Iniciar Servidor del Bot" />
+        <input type="submit" class="boton" name="submit" formtarget="_blank" value="Iniciar Servidor del Bot" />
+</form>
+
+</form>
+    <form action="/subir-imagen" method="POST" enctype="multipart/form-data">
+        Para subir una imagen:
+        <input type="file" class="boton" name="myfile" value="Subir Imagen" />
+        <input type="submit" class="boton" name="submit" value="Subir Imagen" />
+</form>
+</form>
+    <form action="/subir-doc" method="POST" enctype="multipart/form-data">
+        Para subir un documento:
+        <input type="file" class="boton" name="myfile" value="Subir Documento" />
+                <input type="submit" class="boton" name="submit" value="Subir Documento" />
+</form>
+</form>
+    <form action="/subir-sticker" method="POST" enctype="multipart/form-data">
+        Para subir un sticker:
+        <input type="file" class="boton" name="myfile" value="Subir Sticker" />
+        <input type="submit" class="boton" name="submit" value="Subir Sticker" />
 </form>
 </body>
 </html>

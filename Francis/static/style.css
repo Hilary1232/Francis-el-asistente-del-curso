@@ -1,3 +1,7 @@
+body{
+ position:relative;
+}
+
 .header img {
   float: left;
   width: 70px;
@@ -11,6 +15,7 @@
 }
 #usr{
     display:inline-block;
+    color:white;
 }
 .dropdown {
   position: relative;
@@ -29,9 +34,9 @@
   display: block;
 }
 #cuenta{
-    float:right;
-    position:relative;
-    bottom:60px;
+    position:absolute;
+    top:30px;
+    right:15px;
 }
 #arrw{
     position:relative;
@@ -84,23 +89,31 @@
     text-decoration-color: white;
     color:white;
 }
+.boton{
+    background-color: rgba(17, 37, 102, 0.829);
+    text-decoration-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration-color: white;
+    color:white;
+}
 #cursos-section{
     text-align:center;
     width:max-content;
     position:relative;
     left:10%;
 }
-#cursos-row{
-padding:0px 30px 0px 30px;
+#cursos-table{
+    border-radius: 10px;
+    border:1px solid blue;
 }
 nav {
+    position:absolute;
     background-color:rgba(17, 37, 102, 0.829);
     border: 1px solid #dedede;
     border-radius: 4px;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
     color: #888;
-    position:absolute;
-    width:100%;
+    width:1000px;
 }
 ul {
   list-style-type: none;
@@ -137,7 +150,10 @@ li a:hover:not(.active) {
 
 
 }
-
+#cursos-table th,tr{
+    border:1px solid blue;
+    border-radius:10px;
+}
 #cursos td, #cursos th {
   border: 1px solid #ddd;
   padding: 5px;
