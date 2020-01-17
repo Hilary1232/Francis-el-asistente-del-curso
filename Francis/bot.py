@@ -52,7 +52,6 @@ def armar_respuesta(texto):
     df = pd.read_sql_query('SELECT * FROM guion WHERE fecha_envio < "' + date_time + '" or fecha_envio = "";', conn)
     df.head()
     df['lemmatized_text'] = df['contexto']
-    print('lemmatized_text')
     tfidf = TfidfVectorizer()
     x_tfidf = tfidf.fit_transform(df['lemmatized_text'].values.astype('U')).toarray()
     df_tfidf = pd.DataFrame(x_tfidf, columns=tfidf.get_feature_names())
@@ -61,7 +60,6 @@ def armar_respuesta(texto):
     tf = tfidf.transform([lemma]).toarray()
     cos = 1 - pairwise_distances(df_tfidf, tf, metric="cosine")
     index_value = cos.argmax()
-    print(index_value)
     conn.close()
     return [df['respuesta'].loc[index_value], df['sticker'].loc[index_value], df['imagen'].loc[index_value],
             df['documento'].loc[index_value]]
@@ -120,7 +118,6 @@ def enviar_correo(respuesta, usuario, mensaje):
     cons = conn.execute(qry).fetchall()
     emails = [list(i) for i in cons]
     recipients = sum(emails, [])
-    print(recipients)
     conn.close()
     receiver_email_address = ", ".join(recipients)
 
@@ -131,7 +128,6 @@ def enviar_correo(respuesta, usuario, mensaje):
     msg['To'] = receiver_email_address
     msg['Subject'] = email_subject_line
     email_body = 'Mensaje recibido :  ' + mensaje + ' por ' + usuario + '\n\nRespuesta del bot' + ':   ' + respuesta
-    print(email_body)
     msg.attach(MIMEText(email_body, 'plain'))
 
     email_content = msg.as_string()

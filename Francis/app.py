@@ -324,6 +324,9 @@ def tabla_log():
  Se seleccionatodo lo que sera visualizado en tablaGuion.html
  Redirecciona a la página tablaGuion
 '''
+@app.route('/webhook',methods=['POST','GET'])
+def webhook():
+
 
 
 @app.route('/show-guiones', methods=['POST', 'GET'])
