@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import modelo
 import csv
+from httplib2 import Http
 import json
 import collections
 import os
@@ -12,7 +13,7 @@ import secrets
 from PIL import Image
 import cgitb
 import sqlite3
-
+from urllib.parse import urlparse
 from Francis.modelo import Usuario, Curso, Log, Guion, Grupo
 
 cgitb.enable()
@@ -326,7 +327,11 @@ def tabla_log():
 '''
 @app.route('/webhook',methods=['POST','GET'])
 def webhook():
-
+    dir = request.form['url']
+    urld = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/setWebHook?url='
+    url = urld.strip() + dir.strip()
+    print(url)
+    return redirect(url)
 
 
 @app.route('/show-guiones', methods=['POST', 'GET'])
