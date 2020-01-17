@@ -27,13 +27,13 @@
 </div>
 <div id="nav">
     <ul>
-  <li><a a class="active" href="/home">Inicio</a></li>
+  <li><a class="active" href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
     <li><a href="/grupos">Grupos</a></li>
-     <li><a href="/imagenes">Imagenes</a></li>
-    <li><a href="/documentos">Documentos</a></li>
+    <li><a href="/imagenes">Imágenes</a></li>
     <li><a href="/stickers">Stickers</a></li>
+    <li><a href="documentos">Documentos</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
@@ -53,12 +53,13 @@
         <input type="text" name="curso" placeholder="Nombre Curso" /> <br />
          <input type="submit" id="btn" name="submit" value="Cargar" />
 </form>
-    <form action="/log" method="POST" enctype="multipart/form-data">
+<br><br>
+    <form action="/log" method="POST" enctype="multipart/form-data" id = "Verlog">
         <input type="submit" class="boton"  name="submit" value="Ver log" />
 </form>
-
+<br><br>
 </form>
-    <form action="/webhook" method="POST" enctype="multipart/form-data">
+    <form action="/webhook" method="POST" id ="webhookform" enctype="multipart/form-data">
         <input type="text" name="url" placeholder="URL Sitio para Webhook" /> <br />
         <input type="submit" class="boton" name="submit" formtarget="_blank" value="Iniciar Servidor del Bot" />
 </form>

@@ -268,7 +268,8 @@ def transformar(text_file_contents):
 
 @app.route('/imagenes', methods=['GET','POST'])
 def imagenes():
-    return render_template('imagenes.html')
+    imgs = os.listdir('static\img')
+    return render_template('imagenes.html', imgs=imgs)
 
 @app.route('/subir-imagen', methods=['GET','POST'])
 def subir_imagen():
@@ -284,7 +285,8 @@ def subir_imagen():
 
 @app.route('/documentos', methods=['GET','POST'])
 def documentos():
-    return render_template('documentos.html')
+    docs = os.listdir('static\\files')
+    return render_template('documentos.html', docs=docs)
 
 
 @app.route('/subir-doc', methods=['GET','POST'])
@@ -301,7 +303,8 @@ def subir_doc():
 
 @app.route('/stickers', methods=['GET','POST'])
 def stickers():
-    return render_template('stickers.html')
+    stickers = os.listdir('static\stickers')
+    return render_template('stickers.html', stickers=stickers)
 
 
 @app.route('/subir-sticker', methods=['GET','POST'])

@@ -31,11 +31,20 @@
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
     <li><a href="/grupos">Grupos</a></li>
-         <li><a class="active"href="/imagenes">Imagenes</a></li>
+     <li><a class="active"href="/imagenes">Imagenes</a></li>
         <li><a href="/documentos">Documentos</a></li>
         <li><a href="/stickers">Stickers</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
+</form>
+    <form action="/subir-imagen" method="POST" enctype="multipart/form-data">
+        Para subir una imagen:
+        <input type="file" class="boton" name="myfile" value="Subir Imagen" />
+        <input type="submit" class="boton" name="submit" value="Subir Imagen" />
+</form>
+{%for img in imgs %}
+    <td><a href="{{'static/img/' + img}}"target="_blank"><img id="sticky" src="{{'static/img/' + img}}">{{ img }}</a></td>
+{%endfor%}
 </body>
 </html>

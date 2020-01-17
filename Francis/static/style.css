@@ -75,30 +75,25 @@ body{
     text-decoration-color: white;
     color:white;
 }
-#btn2{
-    background-color: rgba(17, 37, 102, 0.829);
-    text-decoration-color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-decoration-color: white;
-    color:white;
+#Verlog{
+display:inline-block;
 }
-#btn3{
-    background-color: rgba(17, 37, 102, 0.829);
-    text-decoration-color: white;
-#btnC{
-    background-color: rgba(17, 37, 102, 0.829);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-decoration-color: white;
-    color:white;
+#webhookform{
+display:inline-block;
 }
-.boton{
-    background-color: rgba(17, 37, 102, 0.829);
-    text-decoration-color: white;
-#btnB{
+#sticky{
+  width:100px;
+  height:100px;
+}
+#pdficon{
+  width:32px;
+  height:32px;
+  }
+.boton {
     background-color: rgba(17, 37, 102, 0.829);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration-color: white;
-    color:white;
+        color:white;
 }
 #cursos-section{
     text-align:center;

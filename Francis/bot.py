@@ -1,3 +1,5 @@
+import os
+import shutil
 import pandas as pd
 import re
 import nltk
@@ -14,6 +16,7 @@ from nltk.corpus import stopwords
 from sklearn.metrics import pairwise_distances
 from sklearn.feature_extraction.text import TfidfVectorizer
 from datetime import datetime
+import io
 
 # Crear motor para conectarse a SQLite3
 from Francis.modelo import Grupo, Log
@@ -94,18 +97,23 @@ def enviar_mensaje(chat_id, mensaje):
         response = requests.post(BOT_URL + "sendMessage", data=params)
         respuesta = response
     if mensaje[3] != "":
-        doc = {"chat_id": chat_id, "document": mensaje[3], "caption": mensaje[0]}
-        enviado = requests.post(BOT_URL + "sendDocument", data=doc)
+        filepath = os.path.join('static\\files',mensaje[3])
+        files = {'document': open(filepath, 'rb')}
+        doc = {"chat_id": chat_id, "caption": mensaje[0]}
+        enviado = requests.post(BOT_URL + "sendDocument", data=doc, files=files)
         respuesta = enviado
-    if mensaje[1] != "":
-        stickerinfo = {"chat_id": chat_id, "sticker": mensaje[1]}
-        sticker = requests.post(BOT_URL + "sendSticker", data=stickerinfo)
-        respuesta = sticker
     if mensaje[2] != "":
-        picinfo = {"chat_id": chat_id, "caption": mensaje[0], "photo": mensaje[2]}
-        imagen = requests.post(BOT_URL + "sendPhoto", data=picinfo)
+        filepath = os.path.join('static\img', mensaje[2])
+        files = {'photo': open(filepath, 'rb')}
+        picinfo = {'chat_id': chat_id, 'caption': mensaje[0]}
+        imagen = requests.post(BOT_URL + "sendPhoto", data=picinfo, files=files)
         respuesta = imagen
-
+    if mensaje[1] != "":
+        filepath = os.path.join('static\stickers', mensaje[1])
+        files = {'sticker': open(filepath, 'rb')}
+        stickerinfo = {"chat_id": chat_id}
+        sticker = requests.post(BOT_URL + "sendSticker", data=stickerinfo, files=files)
+        respuesta = sticker
     return str(respuesta)
 
 

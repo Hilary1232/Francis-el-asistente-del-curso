@@ -31,12 +31,19 @@
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
     <li><a href="/grupos">Grupos</a></li>
-     <li><a href="/imagenes">Imagenes</a></li>
+     <li><a href="/imagenes">Imágenes</a></li>
     <li><a href="/documentos">Documentos</a></li>
     <li><a class="active" href="/stickers">Stickers</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
-
+<form action="/subir-sticker" method="POST" enctype="multipart/form-data">
+    Para subir un sticker:
+    <input type="file" class="boton" name="myfile" value="Subir Sticker" />
+    <input type="submit" class="boton" name="submit" value="Subir Sticker" />
+</form>
+{%for sticker in stickers%}
+    <td><a href="{{'static/stickers/' + sticker}}"target="_blank"><img id="sticky" src="{{'static/stickers/' + sticker}}">{{ sticker }}</a></td>
+{%endfor%}
 </body>
 </html>
