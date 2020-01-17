@@ -31,6 +31,7 @@
   <li><a href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a class="active" href="/show-guiones">Guiones</a></li>
+    <li><a href="/grupos">Grupos</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
@@ -43,6 +44,7 @@
     <input type="text" name="imagen" placeholder="Imagen" />
     <input type="text" name="fecha_envio" placeholder="Fecha de Envío" /><br>
     <input type="text" name="documento" placeholder="Documento" />
+    <input type="text" name="grupo_id" placeholder="GrupoID" />
          <input id = "btn" type="submit" name="submit" value="Actualizar Registro" />
 </form>
 <br><br>
@@ -55,6 +57,7 @@
       <th>Sticker</th>
       <th>Imagen</th>
       <th>Documento</th>
+      <th>GrupoID</th>
       <th>Fecha de envío</th>
 
   </tr>
@@ -68,6 +71,7 @@
     <td>{{data.sticker}}</td>
     <td>{{data.imagen}}</td>
     <td>{{data.documento}}</td>
+    <td>{{data.grupo_id}}</td>
     <td>{{data.fecha_envio}}</td>
 
 {%endfor%}

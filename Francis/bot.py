@@ -16,6 +16,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from datetime import datetime
 
 # Crear motor para conectarse a SQLite3
+from Francis.modelo import Grupo, Log
+
 app = Flask(__name__)
 api = Api(app)
 BOT_URL = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/'
@@ -89,11 +91,14 @@ def obtener_mensaje(data):
 # envía el mensaje de vuelta al usuario
 def enviar_mensaje(chat_id, mensaje):
     respuesta = ""
-    print("HERE!", mensaje[1])
-    if mensaje[2] == "":
+    if mensaje[2] == "" and mensaje[3] == "":
         params = {"chat_id": chat_id, "text": mensaje[0]}
         response = requests.post(BOT_URL + "sendMessage", data=params)
         respuesta = response
+    if mensaje[3] != "":
+        doc = {"chat_id": chat_id, "document": mensaje[3], "caption": mensaje[0]}
+        enviado = requests.post(BOT_URL + "sendDocument", data=doc)
+        respuesta = enviado
     if mensaje[1] != "":
         stickerinfo = {"chat_id": chat_id, "sticker": mensaje[1]}
         sticker = requests.post(BOT_URL + "sendSticker", data=stickerinfo)
@@ -139,23 +144,43 @@ def enviar_correo(respuesta, usuario, mensaje):
 
 
 def loggear_respuesta(mensaje, respuesta):
-    engine = modelo.engine
-    conn = engine.connect()
-    query = "INSERT INTO log(mensaje,respuesta, sticker, imagen, documento, fecha) VALUES(?,?,?,?,?,datetime('now'));"
-    task = (mensaje, respuesta[0], respuesta[1], respuesta[2], respuesta[3])
-    status = conn.execute(query, task)
-    conn.close()
-    return status
-'''
-def obtener_tipo(data):
-    tipo = data['message']["chat"]["type"]
-    return tipo
-'''
+    session = modelo.Session()
+    log = Log()
+    log.mensaje = mensaje
+    log.respuesta = respuesta[0]
+    log.sticker = respuesta[1]
+    log.imagen = respuesta[2]
+    log.documento=respuesta[3]
+    log.fecha = datetime.now()
+    session.add(log)
+    session.commit()
+    session.close()
+    return 0
+
+
+def obtener_grupo(data):
+    nombre = data['message']["chat"]["title"]
+    return nombre
+
+
+def insertar_grupo(grupo_id, nombre):
+    session = modelo.Session()
+    res = Grupo()
+    res.telegram_id = grupo_id
+    res.nombre = nombre
+    session.add(res)
+    session.commit()
+    session.close()
+    return 0
+
+
 #  aqui es la funcion donde va a la base y busca la respuesta adecuada
 def lookup(data):
     mensaje = obtener_mensaje(data)
     usuario = obtener_usuario(data)
     respuesta = armar_respuesta(mensaje)
+    if(mensaje == 'Adicion a nuevo grupo'):
+        insertar_grupo(obtener_chat_id(data), obtener_grupo(data))
     status = enviar_mensaje(obtener_chat_id(data), respuesta)
     enviar_correo(respuesta[0], usuario, mensaje)
     loggear_respuesta(mensaje, respuesta)

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Guiones</title>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/static/home.js"></script>
+
 </head>
 <body>
 <div class = "header">
@@ -27,31 +28,31 @@
 </div>
 <div id="nav">
     <ul>
-  <li><a class="active" href="/home">Inicio</a></li>
+  <li><a href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
-    <li><a href="/grupos">Grupos</a></li>
+    <li><a class="active" href="/grupos">Grupos</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
-<div>
-    <h1>Cursos</h1>
-    {% if cursos %}
-        <table class="table table-bordered">
-        {% for curso in cursos %}
-            <tr class="table-secondary">
-                <td><center><a href="/cargar_guiones?parameter={{ curso }}"value={{ curso }}>{{ curso }}</a></center></td>
-            </tr>
-        {% endfor %}
-        </table>
-    {% endif %}
-<form action="/crear-curso" method="POST" enctype="multipart/form-data">
-        <input type="text" name="curso" placeholder="Nombre Curso" /> <br />
-         <input type="submit" id="btn" name="submit" value="Cargar" />
-</form>
-    <form action="/log" method="POST" enctype="multipart/form-data">
-        <input type="submit" id="btn2" name="submit" value="Ver log" />
-</form>
-</div>
+<br><br>
+<table id="cursos" align="center">
+  <tr>
+      <th>Id</th>
+    <th>Telegram ID</th>
+    <th>Nombre</th>
+  </tr>
+  {%for grupo in grupos%}
+
+<tr>
+    <td>{{grupo.id}}</td>
+    <td>{{grupo.telegram_id}}</td>
+    <td>{{grupo.nombre}}</td>
+</tr>
+{%endfor%}
+
+</tr>
+</table>
+<br />
 </body>
 </html>

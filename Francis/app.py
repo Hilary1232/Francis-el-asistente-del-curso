@@ -13,7 +13,7 @@ from PIL import Image
 import cgitb
 import sqlite3
 
-from Francis.modelo import Usuario, Curso, Log, Guion
+from Francis.modelo import Usuario, Curso, Log, Guion, Grupo
 
 cgitb.enable()
 
@@ -227,10 +227,10 @@ def insertar_csv(fn):
     conn = engine.connect()
     creader = csv.DictReader(open(fn), delimiter=',')
     for t in creader:
-        d = (t['tema'], t['contexto'], t['respuesta'], t['sticker'], t['imagen'],  t['documento'], t['fecha_envio'])
+        d = (t['tema'], t['contexto'], t['respuesta'], t['sticker'], t['imagen'],  t['documento'],t['grupo_id'], t['fecha_envio'])
         print(d)
-        if d != ('', '', '', '', ''):
-            conn.execute("INSERT INTO guion (tema, contexto, respuesta, sticker, imagen, documento, fecha_envio) VALUES (?,?,?,?,?,?,?)", d)
+        if d != ('', '', '', '', '','','',''):
+            conn.execute("INSERT INTO guion (tema, contexto, respuesta, sticker, imagen, documento, grupo_id, fecha_envio) VALUES (?,?,?,?,?,?,?,?)", d)
     message = 'El archivo"' + fn + '" ha sido insertado exitosamente'
     return message
 
@@ -333,6 +333,12 @@ def tabla_guiones():
     session.close()
     return render_template('tablaGuiones.html', guiones=guiones)
 
+@app.route('/grupos', methods=['POST', 'GET'])
+def grupos():
+    session = modelo.Session()
+    grupos = session.query(Grupo).all()
+    session.close()
+    return render_template('grupos.html', grupos=grupos)
 
 '''
 Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un guión, para editarlo, 
@@ -351,7 +357,7 @@ def actualizar_guion():
     imagen = request.form['imagen']
     fecha_envio = request.form['fecha_envio']
     documento = request.form['documento']
-
+    grupo_id = request.form['grupo_id']
     engine = modelo.engine
     conn = engine.connect()
     if tema != '':
@@ -386,6 +392,10 @@ def actualizar_guion():
     if documento != '' and documento is not None:
         sql = 'UPDATE guion SET documento = ? WHERE id = ?;'
         conn.execute(sql, documento, id)
+
+    if grupo_id != '' and documento is not None:
+        sql = 'UPDATE guion SET grupo_id = ? WHERE id = ?;'
+        conn.execute(sql, grupo_id, id)
 
     conn.close()
     session = modelo.Session()

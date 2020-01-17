@@ -22,6 +22,7 @@ class Guion(Base):
     sticker = Column('sticker', String)
     imagen = Column('imagen', String)
     documento = Column('documento', String)
+    grupo_id = Column('grupo_id', Integer)
     fecha_envio = Column('fecha_envio', String)
 
 
@@ -34,6 +35,14 @@ class Log(Base):
     imagen = Column('imagen', String)
     documento = Column('documento', String)
     fecha = Column('fecha', String)
+
+
+class Grupo(Base):
+    __tablename__ = "grupo"
+    id = Column('id', Integer, primary_key=True)
+    telegram_id = Column('telegram_id', Integer)
+    nombre = Column('nombre', String)
+
 
 class Usuario(Base, UserMixin):
     __tablename__ = "usuario"
