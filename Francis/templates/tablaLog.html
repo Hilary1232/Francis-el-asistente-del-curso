@@ -9,30 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/static/home.js"></script>
-<style>
-#cursos {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-
-}
-
-#cursos td, #cursos th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#cursos tr:nth-child(even){background-color: #f2f2f2;}
-
-#cursos tr:hover {background-color: #ddd;}
-
-#cursos th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: rgba(17, 37, 102, 0.829);
-  color: white;
-}
-</style>
 </head>
 <body>
 <div class = "header">
@@ -54,7 +30,7 @@
   <li><a class="active" href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
-  <li><a href="/log">Log</a></li>
+  <li><a class="active" href="/log">Log</a></li>
 </ul>
 </div>
 <table id="cursos" align="center">
@@ -64,17 +40,19 @@
       <th>Respuesta</th>
       <th>Sticker</th>
       <th>Imagen</th>
+      <th>Documento</th>
       <th>Fecha</th>
   </tr>
-  {%for i in data%}
+  {%for entrada in log%}
 
 <tr>
-    <td>{{i[0]}}</td>
-    <td>{{i[1]}}</td>
-    <td>{{i[2]}}</td>
-    <td>{{i[3]}}</td>
-    <td>{{i[4]}}</td>
-    <td>{{i[5]}}</td>
+    <td>{{log.id}}</td>
+    <td>{{log.mensaje}}</td>
+    <td>{{log.respuesta}}</td>
+    <td>{{log.sticker}}</td>
+    <td>{{log.imagen}}</td>
+    <td>{{log.documento}}</td>
+    <td>{{log.fecha}}</td>
 
 {%endfor%}
 
