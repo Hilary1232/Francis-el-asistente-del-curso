@@ -33,6 +33,14 @@
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
+<form action="/cursos" method="POST" enctype="multipart/form-data">
+    <input type="text" name="id" placeholder="Id" />
+        <input type="text" name="nombre" placeholder="Nombre del Curso" />
+         <input id = "btn" type="submit" name="bsubmit" value="Actualizar Curso" />
+    <input id = "btnC" type="submit" name="bsubmit" value="Crear Curso" />
+    <input id = "btnB" type="submit" name="bsubmit" value="Borrar Curso" />
+</form>
+<br><br>
 <table id="cursos" align="center">
   <tr>
     <th>Id</th>

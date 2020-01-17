@@ -77,6 +77,18 @@
     text-decoration-color: white;
     color:white;
 }
+#btnC{
+    background-color: rgba(17, 37, 102, 0.829);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration-color: white;
+    color:white;
+}
+#btnB{
+    background-color: rgba(17, 37, 102, 0.829);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration-color: white;
+    color:white;
+}
 nav {
     background-color:rgba(17, 37, 102, 0.829);
     border: 1px solid #dedede;
