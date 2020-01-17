@@ -352,8 +352,9 @@ def grupos():
 Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un guión, para editarlo, 
 estos sean actualizados en la base de datos Esta actualización va a depender de un id ingresado para saber a cuál 
 dato se está refiriendo Redirecciona a la página de guiones con los datos actualizados 
+Esto pasa al igual que con la opción de eliminar, que se borra un guión en la base, y al igual con crear, que crea un guión en la base
 '''
-@app.route('/actualizar-guion', methods=['POST', 'GET'])
+@app.route('/guiones', methods=['POST', 'GET'])
 def actualizar_guion():
     id = request.form['id']
     tema = request.form['tema']
@@ -423,6 +424,12 @@ def actualizar_guion():
     session.close()
     return render_template('tablaGuiones.html', guiones=guiones)
 
+'''
+Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un curso, para editarlo, 
+estos sean actualizados en la base de datos, esta actualización va a depender de un id ingresado para saber a cuál 
+dato se está refiriendo, redirecciona a la página de cursos con los datos actualizados 
+Esto pasa al igual que con la opción de eliminar, que se borra un curso en la base, y al igual con crear, que crea un curso en la base
+'''
 @app.route('/cursos', methods=['POST', 'GET'])
 def crud_cursos():
     id = request.form['id']
