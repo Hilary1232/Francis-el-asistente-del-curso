@@ -85,6 +85,8 @@ body{
 #btn3{
     background-color: rgba(17, 37, 102, 0.829);
     text-decoration-color: white;
+#btnC{
+    background-color: rgba(17, 37, 102, 0.829);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration-color: white;
     color:white;
@@ -92,6 +94,8 @@ body{
 .boton{
     background-color: rgba(17, 37, 102, 0.829);
     text-decoration-color: white;
+#btnB{
+    background-color: rgba(17, 37, 102, 0.829);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration-color: white;
     color:white;

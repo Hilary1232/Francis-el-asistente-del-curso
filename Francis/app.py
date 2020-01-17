@@ -15,7 +15,7 @@ from PIL import Image
 import cgitb
 import sqlite3
 from urllib.parse import urlparse
-from Francis.modelo import Usuario, Curso, Log, Guion, Grupo
+from modelo import Usuario, Curso, Log, Guion, Grupo
 
 cgitb.enable()
 
@@ -403,10 +403,9 @@ def grupos():
 Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un guión, para editarlo, 
 estos sean actualizados en la base de datos Esta actualización va a depender de un id ingresado para saber a cuál 
 dato se está refiriendo Redirecciona a la página de guiones con los datos actualizados 
+Esto pasa al igual que con la opción de eliminar, que se borra un guión en la base, y al igual con crear, que crea un guión en la base
 '''
-
-
-@app.route('/actualizar-guion', methods=['POST', 'GET'])
+@app.route('/guiones', methods=['POST', 'GET'])
 def actualizar_guion():
     id = request.form['id']
     tema = request.form['tema']
@@ -417,44 +416,57 @@ def actualizar_guion():
     fecha_envio = request.form['fecha_envio']
     documento = request.form['documento']
     grupo_id = request.form['grupo_id']
+    boton = request.form["bsubmit"]
+
     engine = modelo.engine
     conn = engine.connect()
-    if tema != '':
-        sql = 'UPDATE guion SET tema = ? WHERE id = ?;'
-        conn.execute(sql, tema, id)
 
-    if contexto != '':
-        sql = 'UPDATE guion SET contexto = ? WHERE id = ?;'
-        conn.execute(sql, contexto, id)
+    if(boton == "Actualizar Registro"):
+        if tema != '':
+            sql = 'UPDATE guion SET tema = ? WHERE id = ?;'
+            conn.execute(sql, tema, id)
 
-    if respuesta != '':
-        sql = 'UPDATE guion SET respuesta = ? WHERE id = ?;'
-        conn.execute(sql, respuesta, id)
+        if contexto != '':
+            sql = 'UPDATE guion SET contexto = ? WHERE id = ?;'
+            conn.execute(sql, contexto, id)
 
-    if sticker != '':
-        sql = 'UPDATE guion SET sticker = ? WHERE id = ?;'
-        conn.execute(sql, sticker, id)
+        if respuesta != '':
+            sql = 'UPDATE guion SET respuesta = ? WHERE id = ?;'
+            conn.execute(sql, respuesta, id)
 
-    if imagen != '':
-        sql = 'UPDATE guion SET imagen = ? WHERE id = ?;'
-        conn.execute(sql, imagen, id)
+        if sticker != '':
+            sql = 'UPDATE guion SET sticker = ? WHERE id = ?;'
+            conn.execute(sql, sticker, id)
 
-    if fecha_envio == 'Kill':
-        kill = ''
-        sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
-        conn.execute(sql, kill, id)
+        if imagen != '':
+            sql = 'UPDATE guion SET imagen = ? WHERE id = ?;'
+            conn.execute(sql, imagen, id)
 
-    if fecha_envio != '':
-        sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
-        conn.execute(sql, fecha_envio, id)
+        if fecha_envio == 'Kill':
+            kill = ''
+            sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
+            conn.execute(sql, kill, id)
 
-    if documento != '' and documento is not None:
-        sql = 'UPDATE guion SET documento = ? WHERE id = ?;'
-        conn.execute(sql, documento, id)
+        if fecha_envio != '':
+            sql = 'UPDATE guion SET fecha_envio = ? WHERE id = ?;'
+            conn.execute(sql, fecha_envio, id)
 
-    if grupo_id != '' and documento is not None:
-        sql = 'UPDATE guion SET grupo_id = ? WHERE id = ?;'
-        conn.execute(sql, grupo_id, id)
+        if documento != '' and documento is not None:
+            sql = 'UPDATE guion SET documento = ? WHERE id = ?;'
+            conn.execute(sql, documento, id)
+
+        if grupo_id != '' and documento is not None:
+            sql = 'UPDATE guion SET grupo_id = ? WHERE id = ?;'
+            conn.execute(sql, grupo_id, id)
+
+    if (boton == "Crear Registro"):
+        sql = 'INSERT INTO guion (tema,contexto,respuesta,sticker,imagen,documento,grupo_id,fecha_envio) VALUES (?,?,?,?,?,?,?,?);'
+        conn.execute(sql, tema, contexto, respuesta, sticker, imagen, documento, grupo_id,fecha_envio)
+
+    if (boton == "Borrar Registro"):
+        sql = 'DELETE FROM guion WHERE id = ?;'
+        conn.execute(sql, id)
+
 
     conn.close()
     session = modelo.Session()
@@ -463,5 +475,39 @@ def actualizar_guion():
     session.close()
     return render_template('tablaGuiones.html', guiones=guiones)
 
+'''
+Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un curso, para editarlo, 
+estos sean actualizados en la base de datos, esta actualización va a depender de un id ingresado para saber a cuál 
+dato se está refiriendo, redirecciona a la página de cursos con los datos actualizados 
+Esto pasa al igual que con la opción de eliminar, que se borra un curso en la base, y al igual con crear, que crea un curso en la base
+'''
+@app.route('/cursos', methods=['POST', 'GET'])
+def crud_cursos():
+    id = request.form['id']
+    nombre = request.form['nombre']
+    boton = request.form["bsubmit"]
+
+    engine = modelo.engine
+    conn = engine.connect()
+
+    if(boton == "Actualizar Curso"):
+        if(nombre != '' and nombre is not None):
+            sql = 'UPDATE curso SET curso = ? WHERE id = ?;'
+            conn.execute(sql, nombre, id)
+
+    if (boton == "Crear Curso"):
+        sql = 'INSERT INTO curso (curso) VALUES(?);'
+        conn.execute(sql, nombre)
+
+    if (boton == "Borrar Curso"):
+        sql = 'DELETE FROM curso WHERE id = ?;'
+        conn.execute(sql, id)
+
+    conn.close()
+    session = modelo.Session()
+    data = session.query(Curso)
+    cursos = data.all()
+    session.close()
+    return render_template('tablaCursos.html', cursos=cursos)
 
 app.run(host='localhost', port=5001, debug=True)
