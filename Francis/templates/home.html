@@ -30,6 +30,7 @@
   <li><a class="active" href="/home">Inicio</a></li>
   <li><a href="/show-cursos">Cursos</a></li>
   <li><a href="/show-guiones">Guiones</a></li>
+    <li><a href="/grupos">Grupos</a></li>
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
@@ -50,6 +51,12 @@
 </form>
     <form action="/log" method="POST" enctype="multipart/form-data">
         <input type="submit" id="btn2" name="submit" value="Ver log" />
+</form>
+
+    </form>
+    <form action="/webhook" method="POST" enctype="multipart/form-data">
+        <input type="text" name="url" placeholder="URL Sitio para Webhook" /> <br />
+        <input type="submit" id="btn3" name="submit" value="Iniciar Servidor del Bot" />
 </form>
 </div>
 </body>

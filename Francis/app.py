@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import modelo
 import csv
+from httplib2 import Http
 import json
 import collections
 import os
@@ -12,8 +13,8 @@ import secrets
 from PIL import Image
 import cgitb
 import sqlite3
-
-from Francis.modelo import Usuario, Curso, Log, Guion
+from urllib.parse import urlparse
+from Francis.modelo import Usuario, Curso, Log, Guion, Grupo
 
 cgitb.enable()
 
@@ -227,10 +228,10 @@ def insertar_csv(fn):
     conn = engine.connect()
     creader = csv.DictReader(open(fn), delimiter=',')
     for t in creader:
-        d = (t['tema'], t['contexto'], t['respuesta'], t['sticker'], t['imagen'],  t['documento'], t['fecha_envio'])
+        d = (t['tema'], t['contexto'], t['respuesta'], t['sticker'], t['imagen'],  t['documento'],t['grupo_id'], t['fecha_envio'])
         print(d)
-        if d != ('', '', '', '', ''):
-            conn.execute("INSERT INTO guion (tema, contexto, respuesta, sticker, imagen, documento, fecha_envio) VALUES (?,?,?,?,?,?,?)", d)
+        if d != ('', '', '', '', '','','',''):
+            conn.execute("INSERT INTO guion (tema, contexto, respuesta, sticker, imagen, documento, grupo_id, fecha_envio) VALUES (?,?,?,?,?,?,?,?)", d)
     message = 'El archivo"' + fn + '" ha sido insertado exitosamente'
     return message
 
@@ -286,11 +287,6 @@ def home():
 # Este método recupera la key de telegram del usuario que ingresó
 
 
-@app.route('/get-key', methods=['POST'])
-def get_key():
-    bot_key = request.form['key']
-    # key = 1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ
-
 
 '''
 Este método genera una tabla con todos los datos de un curso
@@ -329,6 +325,13 @@ def tabla_log():
  Se seleccionatodo lo que sera visualizado en tablaGuion.html
  Redirecciona a la página tablaGuion
 '''
+@app.route('/webhook',methods=['POST','GET'])
+def webhook():
+    dir = request.form['url']
+    urld = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/setWebHook?url='
+    url = urld.strip() + dir.strip()
+    print(url)
+    return redirect(url)
 
 
 @app.route('/show-guiones', methods=['POST', 'GET'])
@@ -338,6 +341,12 @@ def tabla_guiones():
     session.close()
     return render_template('tablaGuiones.html', guiones=guiones)
 
+@app.route('/grupos', methods=['POST', 'GET'])
+def grupos():
+    session = modelo.Session()
+    grupos = session.query(Grupo).all()
+    session.close()
+    return render_template('grupos.html', grupos=grupos)
 
 '''
 Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un guión, para editarlo, 
@@ -356,7 +365,7 @@ def actualizar_guion():
     imagen = request.form['imagen']
     fecha_envio = request.form['fecha_envio']
     documento = request.form['documento']
-
+    grupo_id = request.form['grupo_id']
     engine = modelo.engine
     conn = engine.connect()
     if tema != '':
@@ -391,6 +400,10 @@ def actualizar_guion():
     if documento != '' and documento is not None:
         sql = 'UPDATE guion SET documento = ? WHERE id = ?;'
         conn.execute(sql, documento, id)
+
+    if grupo_id != '' and documento is not None:
+        sql = 'UPDATE guion SET grupo_id = ? WHERE id = ?;'
+        conn.execute(sql, grupo_id, id)
 
     conn.close()
     session = modelo.Session()

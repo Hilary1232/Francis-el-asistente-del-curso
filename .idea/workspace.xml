@@ -14,6 +14,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -34,15 +35,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
+      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\templates" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis" />
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso" />
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos\Intro y Taller" />
-      <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static\cursos" />
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
@@ -88,13 +88,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="bot_clock" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Francis-el-asistente-del-curso" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Francis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Francis/bot_clock.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.app" />
       <item itemvalue="Python.bot" />
+      <item itemvalue="Python.bot_clock" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
+        <item itemvalue="Python.bot" />
+        <item itemvalue="Python.bot_clock" />
         <item itemvalue="Python.bot" />
       </list>
     </recent_temporary>
@@ -141,25 +165,25 @@
       <screen x="86" y="0" width="1450" height="864" />
     </state>
     <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1578631800328" />
-    <state width="1453" height="292" key="GridCell.Tab.0.bottom" timestamp="1579217251823">
+    <state width="1453" height="292" key="GridCell.Tab.0.bottom" timestamp="1579234113702">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1579217251823" />
+    <state width="1453" height="292" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1579234113702" />
     <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.center" timestamp="1579217251823">
+    <state width="1453" height="292" key="GridCell.Tab.0.center" timestamp="1579234113701">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1579217251823" />
+    <state width="1453" height="292" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1579234113701" />
     <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.left" timestamp="1579217251823">
+    <state width="1453" height="292" key="GridCell.Tab.0.left" timestamp="1579234113701">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1579217251823" />
+    <state width="1453" height="292" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1579234113701" />
     <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1578745300903" />
-    <state width="1453" height="292" key="GridCell.Tab.0.right" timestamp="1579217251823">
+    <state width="1453" height="292" key="GridCell.Tab.0.right" timestamp="1579234113702">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="292" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1579217251823" />
+    <state width="1453" height="292" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1579234113702" />
     <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
     <state x="322" y="75" key="SettingsEditor" timestamp="1578609198776">
       <screen x="86" y="0" width="1450" height="864" />
