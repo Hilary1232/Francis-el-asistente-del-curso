@@ -34,10 +34,10 @@
   <li><a href="/log">Log</a></li>
 </ul>
 </div>
-<div>
+<div id="cursos-section">
     <h1>Cursos</h1>
     {% if cursos %}
-        <table class="table table-bordered">
+        <table id="cursos-row" class="table table-bordered">
         {% for curso in cursos %}
             <tr class="table-secondary">
                 <td><center><a href="/cargar_guiones?parameter={{ curso }}"value={{ curso }}>{{ curso }}</a></center></td>
@@ -45,6 +45,7 @@
         {% endfor %}
         </table>
     {% endif %}
+</div>
 <form action="/crear-curso" method="POST" enctype="multipart/form-data">
         <input type="text" name="curso" placeholder="Nombre Curso" /> <br />
          <input type="submit" id="btn" name="submit" value="Cargar" />
@@ -56,8 +57,7 @@
     </form>
     <form action="/webhook" method="POST" enctype="multipart/form-data">
         <input type="text" name="url" placeholder="URL Sitio para Webhook" /> <br />
-        <input type="submit" id="btn3" name="submit" value="Iniciar Servidor del Bot" />
+        <input type="submit" id="btn3" name="submit" formtarget="_blank" value="Iniciar Servidor del Bot" />
 </form>
-</div>
 </body>
 </html>

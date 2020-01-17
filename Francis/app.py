@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import modelo
 import csv
+from time import sleep
 from httplib2 import Http
 import json
 import collections
@@ -330,7 +331,6 @@ def webhook():
     dir = request.form['url']
     urld = 'https://api.telegram.org/bot1043017404:AAEZabTKNCf8csRbBVvNljrRZ8INL520ZLQ/setWebHook?url='
     url = urld.strip() + dir.strip()
-    print(url)
     return redirect(url)
 
 

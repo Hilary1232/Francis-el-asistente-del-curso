@@ -1,6 +1,5 @@
 import datetime
 from time import sleep
-
 import modelo
 import requests
 from flask import Flask, request
