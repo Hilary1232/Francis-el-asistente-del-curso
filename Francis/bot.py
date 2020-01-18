@@ -1,8 +1,12 @@
+#!/usr/bin/python
 import os
 import shutil
 import pandas as pd
 import re
 import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -17,9 +21,9 @@ from sklearn.metrics import pairwise_distances
 from sklearn.feature_extraction.text import TfidfVectorizer
 from datetime import datetime
 import io
+from modelo import Log, Grupo
 
 # Crear motor para conectarse a SQLite3
-from Francis.modelo import Grupo, Log
 
 app = Flask(__name__)
 api = Api(app)
@@ -68,19 +72,19 @@ def armar_respuesta(texto):
             df['documento'].loc[index_value]]
 
 
-# función que recupera id de chat
+# funcion que recupera id de chat
 def obtener_chat_id(data):
     chat_id = data['message']["chat"]["id"]
     return chat_id
 
 
-# función que recupera id de chat
+# funcion que recupera id de chat
 def obtener_usuario(data):
     usuario = data['message']["from"]["username"]
     return usuario
 
 
-# función que recupera el mensaje de texto
+# funcion que recupera el mensaje de texto
 def obtener_mensaje(data):
     try:
         mensaje = data["message"]["text"]
@@ -89,7 +93,7 @@ def obtener_mensaje(data):
     return mensaje
 
 
-# envía el mensaje de vuelta al usuario
+# envia el mensaje de vuelta al usuario
 def enviar_mensaje(chat_id, mensaje):
     respuesta = ""
     if mensaje[2] == "" and mensaje[3] == "":
@@ -97,19 +101,19 @@ def enviar_mensaje(chat_id, mensaje):
         response = requests.post(BOT_URL + "sendMessage", data=params)
         respuesta = response
     if mensaje[3] != "":
-        filepath = os.path.join('static\\files',mensaje[3])
+        filepath = os.path.join('static/files',mensaje[3])
         files = {'document': open(filepath, 'rb')}
         doc = {"chat_id": chat_id, "caption": mensaje[0]}
         enviado = requests.post(BOT_URL + "sendDocument", data=doc, files=files)
         respuesta = enviado
     if mensaje[2] != "":
-        filepath = os.path.join('static\img', mensaje[2])
+        filepath = os.path.join('static/img', mensaje[2])
         files = {'photo': open(filepath, 'rb')}
         picinfo = {'chat_id': chat_id, 'caption': mensaje[0]}
         imagen = requests.post(BOT_URL + "sendPhoto", data=picinfo, files=files)
         respuesta = imagen
     if mensaje[1] != "":
-        filepath = os.path.join('static\stickers', mensaje[1])
+        filepath = os.path.join('static/stickers', mensaje[1])
         files = {'sticker': open(filepath, 'rb')}
         stickerinfo = {"chat_id": chat_id}
         sticker = requests.post(BOT_URL + "sendSticker", data=stickerinfo, files=files)

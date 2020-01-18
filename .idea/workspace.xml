@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="563950c0-ab1e-49a6-b37c-47ce6c3dc055" name="Default Changelist" comment="" />
+    <list default="true" id="563950c0-ab1e-49a6-b37c-47ce6c3dc055" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Francis/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Francis/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Francis/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Francis/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Francis/db/francis.db" beforeDir="false" afterPath="$PROJECT_DIR$/Francis/db/francis.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Francis/venv/Scripts/python.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Francis/venv/Scripts/python.exe" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +37,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Francis/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -45,8 +51,8 @@
       <recent name="C:\Users\Maria\Desktop\Francis-el-asistente-del-curso\Francis\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.bot">
-    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python">
       <module name="Francis-el-asistente-del-curso" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -109,16 +115,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.app" />
-      <item itemvalue="Python.bot" />
-      <item itemvalue="Python.bot_clock" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.bot" />
-        <item itemvalue="Python.bot_clock" />
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.bot" />
       </list>
     </recent_temporary>
@@ -149,9 +147,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="268" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578608490636">
-      <screen x="86" y="0" width="1450" height="864" />
+    <state x="1308" y="328" width="1688" height="1085" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579306901991">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state x="1308" y="328" width="1688" height="1085" key="#com.intellij.execution.impl.EditConfigurationsDialog/122.45.3718.2115@122.45.3718.2115" timestamp="1579306901991" />
     <state x="268" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/86.0.1450.864@86.0.1450.864" timestamp="1578608490636" />
     <state x="571" y="236" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578625915675">
       <screen x="86" y="0" width="1450" height="864" />
@@ -161,28 +160,33 @@
       <screen x="86" y="0" width="1450" height="864" />
     </state>
     <state x="543" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/86.0.1450.864@86.0.1450.864" timestamp="1578631528388" />
-    <state x="593" y="188" key="FileChooserDialogImpl" timestamp="1578631800328">
-      <screen x="86" y="0" width="1450" height="864" />
+    <state x="1422" y="505" key="FileChooserDialogImpl" timestamp="1579301482306">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state x="1422" y="505" key="FileChooserDialogImpl/122.45.3718.2115@122.45.3718.2115" timestamp="1579301482306" />
     <state x="593" y="188" key="FileChooserDialogImpl/86.0.1450.864@86.0.1450.864" timestamp="1578631800328" />
-    <state width="1453" height="292" key="GridCell.Tab.0.bottom" timestamp="1579288356958">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="3679" height="609" key="GridCell.Tab.0.bottom" timestamp="1579306932197">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state width="3679" height="609" key="GridCell.Tab.0.bottom/122.45.3718.2115@122.45.3718.2115" timestamp="1579306932197" />
     <state width="1453" height="292" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1579288356958" />
     <state width="1429" height="224" key="GridCell.Tab.0.bottom/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.center" timestamp="1579288356958">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="3679" height="609" key="GridCell.Tab.0.center" timestamp="1579306932193">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state width="3679" height="609" key="GridCell.Tab.0.center/122.45.3718.2115@122.45.3718.2115" timestamp="1579306932193" />
     <state width="1453" height="292" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1579288356958" />
     <state width="1429" height="224" key="GridCell.Tab.0.center/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
-    <state width="1453" height="292" key="GridCell.Tab.0.left" timestamp="1579288356958">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="3679" height="609" key="GridCell.Tab.0.left" timestamp="1579306932192">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state width="3679" height="609" key="GridCell.Tab.0.left/122.45.3718.2115@122.45.3718.2115" timestamp="1579306932192" />
     <state width="1453" height="292" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1579288356958" />
     <state width="1429" height="224" key="GridCell.Tab.0.left/86.0.1450.864@86.0.1450.864" timestamp="1578745300903" />
-    <state width="1453" height="292" key="GridCell.Tab.0.right" timestamp="1579288356958">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="3679" height="609" key="GridCell.Tab.0.right" timestamp="1579306932196">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state width="3679" height="609" key="GridCell.Tab.0.right/122.45.3718.2115@122.45.3718.2115" timestamp="1579306932196" />
     <state width="1453" height="292" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1579288356958" />
     <state width="1429" height="224" key="GridCell.Tab.0.right/86.0.1450.864@86.0.1450.864" timestamp="1578745300904" />
     <state width="1453" height="278" key="GridCell.Tab.1.bottom" timestamp="1579267952259">
@@ -201,13 +205,15 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state width="1453" height="278" key="GridCell.Tab.1.right/62.0.1474.864@62.0.1474.864" timestamp="1579267952259" />
-    <state x="322" y="75" key="SettingsEditor" timestamp="1578609198776">
-      <screen x="86" y="0" width="1450" height="864" />
+    <state x="727" y="229" key="SettingsEditor" timestamp="1579301502067">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state x="727" y="229" key="SettingsEditor/122.45.3718.2115@122.45.3718.2115" timestamp="1579301502067" />
     <state x="322" y="75" key="SettingsEditor/86.0.1450.864@86.0.1450.864" timestamp="1578609198776" />
-    <state x="821" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1579013358906">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state x="2036" y="733" key="com.intellij.ide.util.TipDialog" timestamp="1579306817673">
+      <screen x="122" y="45" width="3718" height="2115" />
     </state>
+    <state x="2036" y="733" key="com.intellij.ide.util.TipDialog/122.45.3718.2115@122.45.3718.2115" timestamp="1579306817673" />
     <state x="821" y="281" key="com.intellij.ide.util.TipDialog/62.0.1474.864@62.0.1474.864" timestamp="1579013358906" />
     <state x="833" y="281" key="com.intellij.ide.util.TipDialog/86.0.1450.864@86.0.1450.864" timestamp="1578701597357" />
     <state x="62" y="0" width="1218" height="599" key="dock-window-1" timestamp="1578903722288">
@@ -218,5 +224,16 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="462" y="182" width="672" height="678" key="search.everywhere.popup/62.0.1474.864@62.0.1474.864" timestamp="1578900799563" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Francis/bot.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

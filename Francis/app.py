@@ -1,20 +1,13 @@
+#!/usr/bin/python
 from flask_restful import Resource, Api
 from flask import Flask, render_template, redirect, url_for, make_response, request, flash
-from flask_bootstrap import Bootstrap
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import modelo
 import csv
-from time import sleep
-from httplib2 import Http
-import json
-import collections
 import os
 import secrets
-from PIL import Image
 import cgitb
-import sqlite3
-from urllib.parse import urlparse
 from modelo import Usuario, Curso, Log, Guion, Grupo
 
 cgitb.enable()
@@ -23,13 +16,12 @@ cgitb.enable()
 app = Flask(__name__)
 api = Api(app)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-bootstrap = Bootstrap(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
-# Este método se encarga de traer a un usuario de la base de datos, dado un id para identificarlo
+# Este metodo se encarga de traer a un usuario de la base de datos, dado un id para identificarlo
 # Retorna dicho usuario
 @login_manager.user_loader
 def load_user(user_id):
@@ -45,16 +37,16 @@ def index():
     return render_template('index.html')
 
 
-# Método que simplemente redirecciona a la página para registrarse
+# Metodo que simplemente redirecciona a la pagina para registrarse
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('signup.html')
 
 
-# Este método hace el login de un usuario dependiendo de los que este puso en los campos de nombre de usuario y contraseña
+# Este metodo hace el login de un usuario dependiendo de los que este puso en los campos de nombre de usuario y contrasena
 # Se hacen las verificaciones correspondientes en la base de datos para hacer un login exitoso
-# Se activa o no, la opción de recordar el inicio de sesión
-# Redirecciona a la página inicial index
+# Se activa o no, la opcion de recordar el inicio de sesion
+# Redirecciona a la pagina inicial index
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     engine = modelo.engine
@@ -66,7 +58,7 @@ def login():
             session.commit()
             session.close()
             return redirect(url_for('home'))
-    return '<h1>Usuario o contraseña incorrectos</h1>'
+    return '<h1>Usuario o contrasenna incorrectos</h1>'
     # return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     return render_template('index.html')
@@ -77,17 +69,17 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     print(picture_fn)
-    picture_path = os.path.join(app.root_path, 'static\profile_pics', picture_fn)
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
     archivo = open(picture_path, 'wb')
     archivo.write(form_picture.read())
     archivo.close()
-    return os.path.join('static\profile_pics', picture_fn)
+    return os.path.join('static/profile_pics', picture_fn)
 
 
-# Este método es el encargado de crear una cuenta de usuario
-# Recupera el nombre de usuario, la contraseña y correo para poder crearlo en la base de datos
-# Se crea el ícono respectivo con la foto de usuario y su nombre, una vez que haya iniciado sesión
-# Redirecciona a la página inicial index
+# Este metodo es el encargado de crear una cuenta de usuario
+# Recupera el nombre de usuario, la contrasenna y correo para poder crearlo en la base de datos
+# Se crea el icono respectivo con la foto de usuario y su nombre, una vez que haya iniciado sesion
+# Redirecciona a la pagina inicial index
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     session = modelo.Session()
@@ -98,7 +90,7 @@ def signup():
     user.email = request.form['email']
     validate_email(user.email)
     user.password = hashed_password
-    user.img_src = 'static\profile_pics\default.png'
+    user.img_src = 'static/profile_pics/default.png'
     session.add(user)
     session.commit()
     session.close()
@@ -107,7 +99,7 @@ def signup():
     # return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
 
 
-# Este método valida que el nombre de usuario de un usuario, sea existente para así no crear el mismo
+# Este metodo valida que el nombre de usuario de un usuario, sea existente para asi no crear el mismo
 def validate_username(username):
     session = modelo.Session()
     user = session.query(Usuario).filter_by(username=username).first()
@@ -116,7 +108,7 @@ def validate_username(username):
         raise Exception('Ese usuario ya existe. Favor elegir otro.')
 
 
-# Este método valida que el correo de un usuario, sea existente para así no crear el mismo
+# Este metodo valida que el correo de un usuario, sea existente para asi no crear el mismo
 def validate_email(email):
     session = modelo.Session()
     user = session.query(Usuario).filter_by(email=email).first()
@@ -124,8 +116,7 @@ def validate_email(email):
     if user:
         raise Exception('Ese email ya existe. Favor elegir otro.')
 
-
-# Este método se encarga de actualizar el nombre de usuario de un usuario pero sin crear uno ya existente en la base
+# Este metodo se encarga de actualizar el nombre de usuario de un usuario pero sin crear uno ya existente en la base
 def update_username(username):
     session = modelo.Session()
     if username != current_user.username:
@@ -135,7 +126,7 @@ def update_username(username):
             raise Exception('Ese usuario ya existe. Favor elegir otro.')
 
 
-# Este método se encarga de actualizar el correo de un usuario pero sin crear uno ya existente en la base
+# Este metodo se encarga de actualizar el correo de un usuario pero sin crear uno ya existente en la base
 def update_email(email):
     session = modelo.Session()
     if email != current_user.email:
@@ -145,9 +136,9 @@ def update_email(email):
             raise Exception('Ese email ya existe. Favor elegir otro.')
 
 
-# Este método se encarga de actualizar un perfil de usuario, es decir, la cuenta del usuario
-# Agarra los campos respectivos que el usuario ingresó, incluyendo la imagen, y va cambiando estos campos en la base
-# Redirecciona a la página principal home
+# Este metodo se encarga de actualizar un perfil de usuario, es decir, la cuenta del usuario
+# Agarra los campos respectivos que el usuario ingreso, incluyendo la imagen, y va cambiando estos campos en la base
+# Redirecciona a la pagina principal home
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def update_account():
@@ -175,13 +166,13 @@ def update_account():
     return render_template('home.html')
 
 
-# Solo redirecciona a la página del perfil de usuario
+# Solo redirecciona a la pagina del perfil de usuario
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
 
 
-# Este método hace cierre de sesión y luego redirecciona a la página inicial index
+# Este metodo hace cierre de sesion y luego redirecciona a la pagina inicial index
 @app.route('/logout')
 @login_required
 def logout():
@@ -189,8 +180,8 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Este método descarga un archivo seleccionado desde la pagina presionando el botón correspondiente
-# Ocupa de un archivo cargado y de aquí lo decodifica para poderlo descargar con su extensión
+# Este metodo descarga un archivo seleccionado desde la pagina presionando el boton correspondiente
+# Ocupa de un archivo cargado y de aqui lo decodifica para poderlo descargar con su extension
 @app.route('/descargar', methods=["POST"])
 def descargar_csv():
     request_file = request.files['myfile']
@@ -211,7 +202,7 @@ def crear_curso():
     curso = request.form['curso']
     engine = modelo.engine
     conn = engine.connect()
-    parent_dir = 'static\cursos'
+    parent_dir = 'static/cursos'
     path = os.path.join(parent_dir, curso)
     # Create target Directory if don't exist
     if not os.path.exists(path):
@@ -237,9 +228,9 @@ def insertar_csv(fn):
     return message
 
 
-# Este método es el encargado de cargar un archivo.csv
-# Verifica si hay un archivo existente seleccionado desde la página principal utilizando el explorador de archivos , y una vez hecho esto, se carga el archivo.csv a la página
-# Redirecciona a la página principal home
+# Este metodo es el encargado de cargar un archivo.csv
+# Verifica si hay un archivo existente seleccionado desde la pagina principal utilizando el explorador de archivos , y una vez hecho esto, se carga el archivo.csv a la pagina
+# Redirecciona a la pagina principal home
 @app.route('/cargar', methods=["POST"])
 @login_required
 def cargar_csv():
@@ -247,7 +238,7 @@ def cargar_csv():
     fileitem = request.files['myfile']
     curso = request.args.get('parameter', '')
     guiones = request.args.get('guiones', '')
-    parent_dir = 'static\cursos'
+    parent_dir = 'static/cursos'
     directory = os.path.join(parent_dir, curso)
     # Probar si se cargo el archivo
     if fileitem.filename:
@@ -268,14 +259,14 @@ def transformar(text_file_contents):
 
 @app.route('/imagenes', methods=['GET','POST'])
 def imagenes():
-    imgs = os.listdir('static\img')
+    imgs = os.listdir('static/img')
     return render_template('imagenes.html', imgs=imgs)
 
 @app.route('/subir-imagen', methods=['GET','POST'])
 def subir_imagen():
     fileitem = request.files['myfile']
     fn = os.path.basename(fileitem.filename)
-    directory='static\img'
+    directory='static/img'
     filepath = os.path.join(directory, fn)
     archivo = open(filepath, 'wb')
     archivo.write(fileitem.read())
@@ -285,7 +276,7 @@ def subir_imagen():
 
 @app.route('/documentos', methods=['GET','POST'])
 def documentos():
-    docs = os.listdir('static\\files')
+    docs = os.listdir('static/files')
     return render_template('documentos.html', docs=docs)
 
 
@@ -293,7 +284,7 @@ def documentos():
 def subir_doc():
     fileitem = request.files['myfile']
     fn = os.path.basename(fileitem.filename)
-    directory = 'static\\files'
+    directory = 'static/files'
     filepath = os.path.join(directory, fn)
     archivo = open(filepath, 'wb')
     archivo.write(fileitem.read())
@@ -303,7 +294,7 @@ def subir_doc():
 
 @app.route('/stickers', methods=['GET','POST'])
 def stickers():
-    stickers = os.listdir('static\stickers')
+    stickers = os.listdir('static/stickers')
     return render_template('stickers.html', stickers=stickers)
 
 
@@ -311,7 +302,7 @@ def stickers():
 def subir_sticker():
     fileitem = request.files['myfile']
     fn = os.path.basename(fileitem.filename)
-    directory = 'static\stickers'
+    directory = 'static/stickers'
     filepath = os.path.join(directory, fn)
     archivo = open(filepath, 'wb')
     archivo.write(fileitem.read())
@@ -324,7 +315,7 @@ def subir_sticker():
 @login_required
 def cargar_guiones():
     curso = request.args.get('parameter', '')
-    parent_dir = 'static\cursos'
+    parent_dir = 'static/cursos'
     filename = os.path.join(parent_dir, curso)
     guiones = os.listdir(filename)
     return render_template("guiones.html", guiones=guiones, curso=curso)
@@ -333,20 +324,20 @@ def cargar_guiones():
 @app.route('/home', methods=['GET', 'post'])  # Cuando el href tenga un '/home', que llegue a esta funcion y ejecute
 @login_required
 def home():
-    parent_dir = 'static\cursos'
+    parent_dir = 'static/cursos'
     cursos = os.listdir(parent_dir)
     print(cursos)
     return render_template('home.html', cursos=cursos)
 
 
-# Este método recupera la key de telegram del usuario que ingresó
+# Este metodo recupera la key de telegram del usuario que ingreso
 
 
 
 '''
-Este método genera una tabla con todos los datos de un curso
+Este metodo genera una tabla con todos los datos de un curso
 Se seleccionatodo lo que sera visualizado en tablaCursos.html
-Redirecciona a la página tablaCursos
+Redirecciona a la pagina tablaCursos
 '''
 
 
@@ -360,9 +351,9 @@ def tabla_cursos():
 
 
 '''
-Este método genera una tabla con todos los datos de un log
+Este metodo genera una tabla con todos los datos de un log
 Se seleccionatodo lo que sera visualizado en tablaLog.html
-Redirecciona a la página tablaLog
+Redirecciona a la pagina tablaLog
 '''
 
 
@@ -376,9 +367,9 @@ def tabla_log():
 
 
 '''
- Este método genera una tabla con todos los datos de un guion
+ Este metodo genera una tabla con todos los datos de un guion
  Se seleccionatodo lo que sera visualizado en tablaGuion.html
- Redirecciona a la página tablaGuion
+ Redirecciona a la pagina tablaGuion
 '''
 @app.route('/webhook',methods=['POST','GET'])
 def webhook():
@@ -403,10 +394,10 @@ def grupos():
     return render_template('grupos.html', grupos=grupos)
 
 '''
-Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un guión, para editarlo, 
-estos sean actualizados en la base de datos Esta actualización va a depender de un id ingresado para saber a cuál 
-dato se está refiriendo Redirecciona a la página de guiones con los datos actualizados 
-Esto pasa al igual que con la opción de eliminar, que se borra un guión en la base, y al igual con crear, que crea un guión en la base
+Este metodo hace que dependiendo de los parametros que usuario ingreso en la pagina de un guion, para editarlo, 
+estos sean actualizados en la base de datos Esta actualizacion va a depender de un id ingresado para saber a cual 
+dato se esta refiriendo Redirecciona a la pagina de guiones con los datos actualizados 
+Esto pasa al igual que con la opcion de eliminar, que se borra un guion en la base, y al igual con crear, que crea un guion en la base
 '''
 @app.route('/guiones', methods=['POST', 'GET'])
 def actualizar_guion():
@@ -479,10 +470,10 @@ def actualizar_guion():
     return render_template('tablaGuiones.html', guiones=guiones)
 
 '''
-Este método hace que dependiendo de los parámetros que usuario ingresó en la página de un curso, para editarlo, 
-estos sean actualizados en la base de datos, esta actualización va a depender de un id ingresado para saber a cuál 
-dato se está refiriendo, redirecciona a la página de cursos con los datos actualizados 
-Esto pasa al igual que con la opción de eliminar, que se borra un curso en la base, y al igual con crear, que crea un curso en la base
+Este metodo hace que dependiendo de los parametros que usuario ingreso en la pagina de un curso, para editarlo, 
+estos sean actualizados en la base de datos, esta actualizacion va a depender de un id ingresado para saber a cual 
+dato se esta refiriendo, redirecciona a la pagina de cursos con los datos actualizados
+Esto pasa al igual que con la opcion de eliminar, que se borra un curso en la base, y al igual con crear, que crea un curso en la base
 '''
 @app.route('/cursos', methods=['POST', 'GET'])
 def crud_cursos():
