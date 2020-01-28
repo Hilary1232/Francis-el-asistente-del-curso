@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from flask import Flask, render_template, redirect, url_for, make_response, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_bootstrap import Bootstrap
 import modelo
 import csv
 import os
@@ -15,6 +16,7 @@ cgitb.enable()
 # Crear motor para conectarse a SQLite3
 app = Flask(__name__)
 api = Api(app)
+bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 login_manager = LoginManager()
 login_manager.init_app(app)
